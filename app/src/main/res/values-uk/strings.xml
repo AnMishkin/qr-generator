@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">QR GENERATOR</string>
+    <string name="generate">Генерувати</string>
+    <string name="cleared">Очищено!</string>
+    <string name="your_qr_code_has_been_generated">Ваш QR-код створено!</string>
+    <string name="share_qr">Поділитися</string>
+    <string name="save_qr">Зберегти QR</string>
+    <string name="name_qr_hint">Введіть назву QR...</string>
+    <string name="link_qr_hint">Вставте сюди посилання або текст...</string>
+    <string name="create_qr">Створити</string>
+    <string name="home">Головна</string>
+    <string name="history">Історія</string>
+    <string name="clear">Очистити все</string>
+    <string name="could_save_bitmap">Не вдалося зберегти QR</string>
+    <string name="failed_to_share">Не вдалося поділитися</string>
+    <string name="create_qr_first">Спочатку створіть QR!</string>
+    <string name="yes">Так</string>
+    <string name="no">Ні</string>
+    <string name="all_history_removed">Усю історію видалено!</string>
+    <string name="are_you_sure">Ви впевнені?</string>
+    <string name="you_want_delete_all_history">Ви хочете видалити всю історію?</string>
+    <string name="fill_boxes">Будь ласка, заповніть текстове поле або поле імені!</string>
+    <string name="photo_saved_ok">QR успішно збережено!</string>
+    <string name="failed_save_photo">Не вдалося зберегти QR!</string>
+    <string name="removed">Видалено</string>
+    <string name="delete">Видалити</string>
+    <string name="sure_delete_qr">Ви впевнені, що хочете видалити цей QR?</string>
+    <string name="fragment_history_name">QR з вашої історії</string>
+    <string name="done">Готово!</string>
+</resources>
