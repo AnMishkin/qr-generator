@@ -57,6 +57,17 @@
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/bfb57c05d89dbd7fad5c9d18006b52fd/transformed/legacy-support-v4-1.0.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/6e9e44515bc2fe5ce8db53f2d9966e03/transformed/lifecycle-extensions-2.2.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/3ce16c3c0a98c8b8bed811698303e047/transformed/jetified-viewpager2-1.0.0-api.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/2b1017e5f0c1e77e17be3f243cce9da4/transformed/jetified-play-services-ads-21.4.0-api.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/5d5c765af9794a97bb85806fa19d5a77/transformed/jetified-play-services-ads-lite-21.4.0-api.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/25d53629d400db9db692a925bc8ff542/transformed/jetified-play-services-ads-base-21.4.0-api.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/10d59cd2e431eeb3d5548ab614d7a17d/transformed/jetified-user-messaging-platform-2.0.0-api.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/f0e7a8a659b8197fbccf4bc2ab494435/transformed/jetified-play-services-ads-identifier-18.0.0-api.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/6c3977494f1fe446a72e7feffa0aad20/transformed/jetified-play-services-appset-16.0.1-api.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/b96255d770255726f4e563c847e85806/transformed/jetified-play-services-base-18.0.0-api.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/efb42330045850aea024d965b88fc688/transformed/jetified-play-services-tasks-18.0.1-api.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/e74c6fcd1899b04ee250883ee4ecd32e/transformed/jetified-play-services-measurement-sdk-api-20.1.2-api.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/31edffbac201fdc06b25468368c2a154/transformed/jetified-play-services-measurement-base-20.1.2-api.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/123915c638ed34c528bd16b563742a5d/transformed/jetified-play-services-basement-18.0.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/ea61bf7c2c5b77f955fd172b3b7decd6/transformed/fragment-1.4.1-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/07e9cc58b08434e51e85c34c1274cadd/transformed/jetified-core-ktx-1.7.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/d6c7572649ae5850d378f12c229bc51e/transformed/jetified-kotlin-stdlib-jdk7-1.6.20.jar</arg>
@@ -90,6 +101,7 @@
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/51063a361db956213b61ee72a3467ff1/transformed/vectordrawable-animated-1.1.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/a5ab9dbe84033050ee75e479e1f6cc00/transformed/vectordrawable-1.1.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/56989f8e8b908084f67abdb8d3457f00/transformed/media-1.0.0-api.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/9659cb08a802b1a41eeb25318762012b/transformed/browser-1.4.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/90b96450b305d9a42e624e73cb970b9e/transformed/viewpager-1.0.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/4618e0a7f1dac738a53a760e2fcaf285/transformed/slidingpanelayout-1.2.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/d002af6b09cef37ed1a26071dfe74313/transformed/customview-1.1.0-api.jar</arg>
@@ -106,6 +118,7 @@
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/modules-2/files-2.1/androidx.room/room-common/2.4.2/63d9f9cb245ee9b4c8ebb8aca201661f99583ffa/room-common-2.4.2.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/f23bcb2bf6bba0e1fb8966ddedf4bf65/transformed/sqlite-framework-2.2.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/15a2662c0f437d9441b629f2b08eb1f4/transformed/sqlite-2.2.0-api.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/a39c365d703732d1f4ca16bff21110ab/transformed/work-runtime-2.7.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/b971ae791d0e59de39d564f617f36a8b/transformed/lifecycle-livedata-2.2.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/a4e44347a747f647c85fbfcf7575705c/transformed/core-runtime-2.1.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.1.0/b3152fc64428c9354344bd89848ecddc09b6f07e/core-common-2.1.0.jar</arg>
@@ -119,6 +132,7 @@
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/7d1ba36550dd66794ebcf91941d36a0b/transformed/interpolator-1.0.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation/1.3.0/21f49f5f9b85fc49de712539f79123119740595/annotation-1.3.0.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/73ce84b07e4f98495f8f8974552ceda2/transformed/jetified-annotation-experimental-1.1.0-api.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/a7a3f2c4c76ee05f707e15cb4978a0ac/transformed/jetified-listenablefuture-1.0.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/7989a7fdee0d5a2dff1a1cb830413b87/transformed/jetified-startup-runtime-1.0.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/da9957542e1b72fb31271693ef402107/transformed/constraintlayout-2.1.3-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/94d1172249bf1681c5eddcb64d22b20b/transformed/jetified-QRGenearator-1.0.4-api.jar</arg>
@@ -217,6 +231,7 @@
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-reflect:1.4.21" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.0.0" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.guava:listenablefuture:1.0" level="project" />
     <orderEntry type="library" name="Gradle: androidx.databinding:viewbinding:7.2.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.core:core-ktx:1.7.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.core:core:1.7.0@aar" level="project" />
@@ -284,5 +299,18 @@
     <orderEntry type="library" name="Gradle: androidx.startup:startup-runtime:1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-service:2.2.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidmads.library.qrgenearator:QRGenearator:1.0.4@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads:21.4.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.browser:browser:1.4.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-base:21.4.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-basement:18.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-identifier:18.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-lite:21.4.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.work:work-runtime:2.7.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-sdk-api:20.1.2@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-base:20.1.2@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.ump:user-messaging-platform:2.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-appset:16.0.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-base:18.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-tasks:18.0.1@aar" level="project" />
   </component>
 </module>

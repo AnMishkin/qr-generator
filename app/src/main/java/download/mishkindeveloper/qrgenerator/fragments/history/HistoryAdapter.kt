@@ -1,5 +1,6 @@
 package download.mishkindeveloper.qrgenerator.fragments.history
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -102,7 +103,11 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 //}
 
 
-
+ fun toJson(){
+//    val historyToJson : MutableList<History> = MutableList<History>()
+////qrListToJson()
+//    Log.d("MyLog","$historyToJson")
+}
 
 
 

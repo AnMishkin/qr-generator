@@ -13,4 +13,6 @@
     <color name="dark">#050F2F</color>
     <color name="darker">#020A32</color>
     <color name="gray">#727D9E</color>
+
+    <color name="main">#1E2237</color>
 </resources>

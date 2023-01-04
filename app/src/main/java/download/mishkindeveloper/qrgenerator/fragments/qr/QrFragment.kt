@@ -10,6 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import download.mishkindeveloper.qrgenerator.R
 import download.mishkindeveloper.qrgenerator.databinding.FragmentQrBinding
 import download.mishkindeveloper.qrgenerator.fragments.globalFunctions.generateQr
@@ -24,6 +27,9 @@ import java.util.*
 
 @InternalCoroutinesApi
 class QrFragment : Fragment() {
+
+    private lateinit var mAdView : AdView
+
     private val adapterHistory = HistoryAdapter()
     private var isImageScaled = false
     private lateinit var binding: FragmentQrBinding
@@ -45,7 +51,7 @@ class QrFragment : Fragment() {
                 binding.saveQR.isVisible = false
                 binding.type.isVisible = false
                 binding.qrGeneratedText.isVisible = false
-
+                binding.adView.isVisible = false
             }
             if (isImageScaled) {
                 R.style.Theme_AppCompat_DayNight_NoActionBar
@@ -54,7 +60,7 @@ class QrFragment : Fragment() {
                 binding.saveQR.isVisible = true
                 binding.type.isVisible = true
                 binding.qrGeneratedText.isVisible = true
-
+                binding.adView.isVisible = true
             }
             isImageScaled = !isImageScaled
         }
@@ -90,6 +96,13 @@ class QrFragment : Fragment() {
                 }
             }
         }
+        //банерная реклама
+        MobileAds.initialize(this.requireContext()) {}
+        mAdView = binding.adView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+        //конец банерная реклама
+
         return  binding.root
     }
 

@@ -4,15 +4,18 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import download.mishkindeveloper.qrgenerator.R
 import download.mishkindeveloper.qrgenerator.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
-
+    lateinit var mAdView : AdView
     private lateinit var binding: FragmentHomeBinding
-
+    val bundle = Bundle()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,6 +31,12 @@ val editText = binding.plainText
 
         var home = R.layout.fragment_home
 
+        //банерная реклама
+        MobileAds.initialize(this.requireContext()) {}
+        mAdView = binding.adView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+        //конец банерная реклама
 
         linkAndTextRequest(binding)
             binding.clear.setOnClickListener {
@@ -65,7 +74,6 @@ val editText = binding.plainText
             onGenerateClicked()
            if (binding.plainText.text.isNotEmpty()){
                item.isVisible = false
-
            }
         }
 

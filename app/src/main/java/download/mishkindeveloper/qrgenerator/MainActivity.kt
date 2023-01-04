@@ -11,7 +11,12 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import download.mishkindeveloper.qrgenerator.databinding.ActivityMainBinding
+import com.google.android.gms.ads.MobileAds;
+
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -27,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         setupNav()
         setupActionBarWithNavController(navController)
         binding.bottomNavView.setupWithNavController(navController)
+
 
 
 
@@ -82,6 +88,7 @@ class MainActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(ev)
     }
+
 
 
 }

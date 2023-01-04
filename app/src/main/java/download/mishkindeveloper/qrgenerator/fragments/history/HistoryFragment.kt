@@ -2,6 +2,7 @@ package download.mishkindeveloper.qrgenerator.fragments.history
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.core.view.isEmpty
@@ -19,6 +20,7 @@ import download.mishkindeveloper.qrgenerator.viewmodels.DatabaseViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
 import download.mishkindeveloper.qrgenerator.model.History
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.google.android.gms.ads.MobileAds
 
 @InternalCoroutinesApi
 class HistoryFragment : Fragment() {
@@ -39,15 +41,11 @@ class HistoryFragment : Fragment() {
         binding = FragmentHistoryBinding.inflate(inflater , container, false)
 startHistoryView()
 
+
         mDatabaseViewModel.readAllData.observe(viewLifecycleOwner, Observer {
             adapter.setData(it)
         })
-
-
-        //Log.d("MyLog","$historyList")
-
         setHasOptionsMenu(true)
-
         return binding.root
 
 
@@ -83,10 +81,13 @@ startHistoryView()
 //            Log.d("MyLog","${allQr.toString()}")
         }
 
-//        if (item.itemId==R.id.export){
+        if (item.itemId==R.id.export){
+//            val historyToJson : MutableList<History> = MutableList<History>()
 ////qrListToJson()
-//            //Log.d("MyLog","$baseToJson")
-//        }
+//            Log.d("MyLog","$historyToJson")
+            val historyToJson = adapter.setData(historyList)
+            Log.d("MyLog","$historyToJson")
+        }
 
         return super.onOptionsItemSelected(item)
     }
