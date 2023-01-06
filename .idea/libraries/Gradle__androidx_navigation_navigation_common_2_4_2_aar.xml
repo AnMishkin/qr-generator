@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.navigation:navigation-common:2.4.2@aar">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/34a99c5e83a82748608ed6a1d10a1f38/transformed/navigation-common-2.4.2/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/34a99c5e83a82748608ed6a1d10a1f38/transformed/navigation-common-2.4.2/res" />
-      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/34a99c5e83a82748608ed6a1d10a1f38/transformed/navigation-common-2.4.2/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/110244bfee6069f69f72aab9822fbf34/transformed/navigation-common-2.4.2/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/110244bfee6069f69f72aab9822fbf34/transformed/navigation-common-2.4.2/res" />
+      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/110244bfee6069f69f72aab9822fbf34/transformed/navigation-common-2.4.2/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

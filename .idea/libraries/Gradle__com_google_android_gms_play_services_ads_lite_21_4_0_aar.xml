@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.android.gms:play-services-ads-lite:21.4.0@aar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/f6ae405922c76d4b0b2b39fd923b3be8/transformed/jetified-play-services-ads-lite-21.4.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/f6ae405922c76d4b0b2b39fd923b3be8/transformed/jetified-play-services-ads-lite-21.4.0/res" />
+      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/f6ae405922c76d4b0b2b39fd923b3be8/transformed/jetified-play-services-ads-lite-21.4.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-ads-lite/21.4.0/4b233f142031b89e8e7048d47267d5771937ef3f/play-services-ads-lite-21.4.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

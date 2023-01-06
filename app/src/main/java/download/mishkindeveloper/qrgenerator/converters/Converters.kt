@@ -14,7 +14,7 @@ class Converters {
     @TypeConverter
     fun fromBitmap(bitmap: Bitmap): ByteArray {
         val outputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 5, outputStream)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
         return outputStream.toByteArray()
     }
 
@@ -23,12 +23,12 @@ class Converters {
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
     }
 
-
-        @TypeConverter
-        fun fromAppToJsonList(value : MutableList<History>) = Json.encodeToString(value)
-
-        @TypeConverter
-        fun toAppFromJsonList(value: String) = Json.decodeFromString<MutableList<History>>(value)
+//
+//        @TypeConverter
+//        fun fromAppToJsonList(value : MutableList<History>) = Json.encodeToString(value)
+//
+//        @TypeConverter
+//        fun toAppFromJsonList(value: String) = Json.decodeFromString<MutableList<History>>(value)
 
 
 

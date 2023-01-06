@@ -1,4 +1,7 @@
 package download.mishkindeveloper.qrgenerator.fragments.home
+
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -13,17 +16,14 @@ import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
-    lateinit var mAdView : AdView
+    private lateinit var mAdView : AdView
     private lateinit var binding: FragmentHomeBinding
-    val bundle = Bundle()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-//        logoGone()
 
 
         setHasOptionsMenu(true)
@@ -69,8 +69,7 @@ val editText = binding.plainText
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.home_menu) {
-//создание кода
-
+            //создание кода
             onGenerateClicked()
            if (binding.plainText.text.isNotEmpty()){
                item.isVisible = false
@@ -125,31 +124,17 @@ val editText = binding.plainText
                 addNameQr = binding.edNameQr.text.toString()
             }
         }
-
         val direction = HomeFragmentDirections.actionHomeFragmentToSuccessFragment(
             text,
             addNameQr,
             //qrType,
-            qrText
+            qrText,
+            //countAd
+            //mArgs
         )
         findNavController().navigate(direction)
-
         binding.edNameQr.text.clear()
         binding.plainText.text.clear()
     }
 
-
-//private fun logoGone(){
-//    var editTextName = binding.edNameQr
-//    val icon = binding.icon
-//
-//
-////    if(editTextName.isInEditMode){
-////        icon.isVisible = false
-////    }
-////    else{
-////        icon.isVisible = true
-////    }
-//
-//}
 }

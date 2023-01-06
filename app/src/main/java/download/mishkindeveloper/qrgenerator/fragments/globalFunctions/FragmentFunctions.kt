@@ -7,7 +7,7 @@ import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.InternalCoroutinesApi
-
+import download.mishkindeveloper.qrgenerator.json.SharedPreference
 
 @InternalCoroutinesApi
 fun Fragment.generateQr(userInput: String): Bitmap {

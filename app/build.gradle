@@ -48,6 +48,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
     implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    apply plugin: "androidx.navigation.safeargs.kotlin"
 
     //Coil
     implementation("io.coil-kt:coil:2.0.0-rc03")
@@ -83,4 +84,5 @@ dependencies {
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.12.1'
 
     implementation 'com.google.android.gms:play-services-ads:21.4.0'
+
 }

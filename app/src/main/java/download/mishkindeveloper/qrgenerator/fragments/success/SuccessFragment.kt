@@ -1,6 +1,8 @@
 package download.mishkindeveloper.qrgenerator.fragments.success
 
 import android.Manifest
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.TextUtils
@@ -30,7 +32,6 @@ import java.util.*
 
 @InternalCoroutinesApi
 class SuccessFragment : Fragment() {
-
     private lateinit var mAdView : AdView
 
     private var isImageScaled = false
@@ -130,7 +131,6 @@ class SuccessFragment : Fragment() {
                 mDatabaseViewModel.addQrHistory(history)
             }
         }
-
     }
 
 

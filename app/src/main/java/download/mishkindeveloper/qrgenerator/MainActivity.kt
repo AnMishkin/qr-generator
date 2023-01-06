@@ -1,8 +1,10 @@
 package download.mishkindeveloper.qrgenerator
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings.System.putInt
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -22,7 +24,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_QRCreator)
@@ -32,9 +33,6 @@ class MainActivity : AppCompatActivity() {
         setupNav()
         setupActionBarWithNavController(navController)
         binding.bottomNavView.setupWithNavController(navController)
-
-
-
 
 
 
