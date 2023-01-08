@@ -1,16 +1,22 @@
 package download.mishkindeveloper.qrgenerator.fragments.history
 
+import android.app.Application
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.LiveData
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import download.mishkindeveloper.qrgenerator.databinding.CustomRowBinding
 import download.mishkindeveloper.qrgenerator.model.History
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.google.gson.Gson
+import download.mishkindeveloper.qrgenerator.viewmodels.DatabaseViewModel
+import kotlinx.coroutines.InternalCoroutinesApi
+import org.json.JSONObject
 
 class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
@@ -71,42 +77,13 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-//    fun JsonPerse(history: List<History>){
-//        this.historyList = history
-//        var OutJson:<String>()
-//        var exportQr = JSONObject(
-//            this,OutJson,
-//        )
-//    }
-//
-//    interface Listener{
-//        fun deleteOneQr()
-//    }
+    fun toJson(){
+        val allData = historyList
+        Log.d("MyLog","это alldata - $allData")
+        val json = Gson().toJson(allData)
+        Log.d("MyLog","это json - $json")
+    }
 
-//    fun jsonParse(){
-//        val historyForParseList = mutableListOf<History>()
-//        historyForParseList.addAll(historyList)
-//
-//        Log.d("MyLog","$historyForParseList")
-//
-//    }
-
-}
-
-//private fun toJson(){
-//    val historyDao = HistoryDao()
-//    val readAllData: LiveData<List<History>> = historyDao.readAllData()
-//    val to =
-//    Log.d("MyLog","$to")
-//    return
-//
-//}
-
-
- fun toJson(){
-//    val historyToJson : MutableList<History> = MutableList<History>()
-////qrListToJson()
-//    Log.d("MyLog","$historyToJson")
 }
 
 

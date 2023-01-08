@@ -21,6 +21,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import download.mishkindeveloper.qrgenerator.model.History
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.google.android.gms.ads.MobileAds
+import com.google.gson.Gson
 
 @InternalCoroutinesApi
 class HistoryFragment : Fragment() {
@@ -41,16 +42,19 @@ class HistoryFragment : Fragment() {
         binding = FragmentHistoryBinding.inflate(inflater , container, false)
 startHistoryView()
 
+allHistoryInList()
 
-        mDatabaseViewModel.readAllData.observe(viewLifecycleOwner, Observer {
-            adapter.setData(it)
-        })
         setHasOptionsMenu(true)
         return binding.root
 
 
     }
 
+    private fun allHistoryInList(){
+        mDatabaseViewModel.readAllData.observe(viewLifecycleOwner, Observer {
+            adapter.setData(it)
+        })
+    }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -68,25 +72,11 @@ startHistoryView()
                 deleteAllHistory()
 
             }
-
-
-
-
-//            var exportQr = JSONObject(
-//                history = List<History>,)
-//            )
-//            val adapter = HistoryAdapter()
-//            adapter.jsonParse()
-//           var allQr =  mDatabaseViewModel.readAllData
-//            Log.d("MyLog","${allQr.toString()}")
         }
 
+        //экспорт json файла
         if (item.itemId==R.id.export){
-//            val historyToJson : MutableList<History> = MutableList<History>()
-////qrListToJson()
-//            Log.d("MyLog","$historyToJson")
-            val historyToJson = adapter.setData(historyList)
-            Log.d("MyLog","$historyToJson")
+adapter.toJson()
         }
 
         return super.onOptionsItemSelected(item)
@@ -118,39 +108,6 @@ startHistoryView()
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
-//     fun deleteOneQrHistory() {
-//        val builder = AlertDialog.Builder(requireContext())
-//        builder.setPositiveButton("Yes"){ _, _ ->
-//            mDatabaseViewModel.deleteQrHistory(args.currentQR)
-//            Toast.makeText(requireContext(), "Removed ${args.currentQR.text}", Toast.LENGTH_SHORT).show()
-//        }
-//
-//        builder.setNegativeButton("No"){_, _ -> }
-//        builder.setTitle("Delete ${args.currentQR.text} ?")
-//        builder.setMessage("Are You Sure You Want to Delete This QR ?")
-//        builder.create().show()
-//    }
-
-
-
-
-
-//    private fun qrListToJson(){
-//
-//        val qrToJson   = (historyList.toMutableList())
-//        val map = Converters().fromAppToJsonList(qrToJson)
-//
-//
-//
-//
-//  //qrToJson.add()
-//
-//
-//        //val jsonArray = mapper.writeValueAsString(map)
-//       // Log.d("MyLog","$jsonArray")
-//        Log.d("MyLog","$qrToJson")
-//        Log.d("MyLog","$map")
-//    }
 
 
 }

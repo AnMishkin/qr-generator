@@ -139,6 +139,7 @@
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/c4358e014953a50c9bd2ed865403be4f/transformed/jetified-kotlin-stdlib-1.6.21.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/94541e338c1ebe3528d044c0a4f75119/transformed/jetified-kotlin-stdlib-common-1.6.21.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/b927f87b2a8ee700a90be8e07588aff4/transformed/jetified-annotations-13.0.jar</arg>
+                <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/62e2ccff29b103633f27913716e94895/transformed/jetified-gson-2.9.0.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/e7d150d8adef5ac86c1e3414683880be/transformed/jetified-junit-4.12.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/85a683178831983bf4a83b28575c40b6/transformed/jetified-hamcrest-integration-1.3.jar</arg>
                 <arg>$MODULE_DIR$/../../../../../AutoClicker3/.gradle/caches/transforms-3/2c702ca836bfb49122ffb4b5cf637752/transformed/jetified-hamcrest-library-1.3.jar</arg>
@@ -251,6 +252,7 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlin:kotlin-reflect:1.4.21" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.0.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.0.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.google.code.gson:gson:2.9.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.guava:listenablefuture:1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.room:room-testing:2.4.2@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.room:room-runtime:2.4.2@aar" level="project" />

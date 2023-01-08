@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings.System.putInt
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -13,14 +14,17 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.*
 import download.mishkindeveloper.qrgenerator.databinding.ActivityMainBinding
-import com.google.android.gms.ads.MobileAds;
-
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
 
 class MainActivity : AppCompatActivity() {
+
+    private var mInterstitialAd: InterstitialAd? = null
+    private final var TAG = "MainActivity"
+
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
 
@@ -29,10 +33,11 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Theme_QRCreator)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initAds()
 
         setupNav()
         setupActionBarWithNavController(navController)
-        binding.bottomNavView.setupWithNavController(navController)
+       binding.bottomNavView.setupWithNavController(navController)
 
 
 
@@ -53,10 +58,28 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.homeFragment -> showBottomNav()
-                R.id.historyFragment -> showBottomNav()
+                R.id.homeFragment -> {
+                    //showAd()
+                    showBottomNav()
+                    initAds()
+                }
+                R.id.historyFragment -> {
+                 showAd()
+                    Log.d("MyLog","нажали на историю")
+                    showBottomNav()
+                    initAds()
+                }
                 else -> hideBottomNav()
             }
+        }
+    }
+
+    private fun showAd(){
+        if (mInterstitialAd != null) {
+            mInterstitialAd?.show(this)
+        } else {
+            initAds()
+            Log.d("TAG", "The interstitial ad wasn't ready yet.")
         }
     }
 
@@ -87,7 +110,58 @@ class MainActivity : AppCompatActivity() {
         return super.dispatchTouchEvent(ev)
     }
 
+    private fun initAds() {
+        MobileAds.initialize(this) {}
+        var adRequest = AdRequest.Builder().build()
 
+        InterstitialAd.load(
+            this,
+            "ca-app-pub-3940256099942544/1033173712",
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Log.d(TAG, adError?.toString())
+                    mInterstitialAd = null
+                    initAds()
+                }
+
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    Log.d(TAG, "Ad was loaded.")
+                    mInterstitialAd = interstitialAd
+                }
+            })
+        mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
+            override fun onAdClicked() {
+                // Called when a click is recorded for an ad.
+                Log.d(TAG, "Ad was clicked.")
+            }
+
+            override fun onAdDismissedFullScreenContent() {
+                // Called when ad is dismissed.
+                Log.d(TAG, "Ad dismissed fullscreen content.")
+                mInterstitialAd = null
+                initAds()
+            }
+
+            override fun onAdFailedToShowFullScreenContent(p0: AdError) {
+                // Called when ad fails to show.
+                Log.e(TAG, "Ad failed to show fullscreen content.")
+                mInterstitialAd = null
+                initAds()
+            }
+
+            override fun onAdImpression() {
+                // Called when an impression is recorded for an ad.
+                Log.d(TAG, "Ad recorded an impression.")
+            }
+
+            override fun onAdShowedFullScreenContent() {
+                // Called when ad is shown.
+                Log.d(TAG, "Ad showed fullscreen content.")
+                initAds()
+            }
+        }
+    }
 
 }
 
