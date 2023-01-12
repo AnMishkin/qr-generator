@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.room:room-testing:2.4.2@aar">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/d532e0df1f1c4471aaee9acc8e7c3bd0/transformed/room-testing-2.4.2/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/d532e0df1f1c4471aaee9acc8e7c3bd0/transformed/room-testing-2.4.2/res" />
-      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/d532e0df1f1c4471aaee9acc8e7c3bd0/transformed/room-testing-2.4.2/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/8eebb9d3fdfa9415b687bcac58413340/transformed/room-testing-2.4.2/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/8eebb9d3fdfa9415b687bcac58413340/transformed/room-testing-2.4.2/res" />
+      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/8eebb9d3fdfa9415b687bcac58413340/transformed/room-testing-2.4.2/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

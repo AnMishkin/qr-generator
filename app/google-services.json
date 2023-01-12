@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "318376256290",
+    "project_id": "qr-generator-98d54",
+    "storage_bucket": "qr-generator-98d54.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318376256290:android:0c55dc490cab6c8c463b7b",
+        "android_client_info": {
+          "package_name": "download.mishkindeveloper.qrgenerator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "318376256290-udpbs3g52h316tp43kfbob6p7ovfsis5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo2picx334vLD9snAZxt6xiwqyCdqYvn0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "318376256290-udpbs3g52h316tp43kfbob6p7ovfsis5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
