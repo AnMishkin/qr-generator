@@ -2,6 +2,7 @@ package download.mishkindeveloper.qrgenerator
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings.System.putInt
@@ -25,6 +26,7 @@ import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
+    private var countAd:Int = 0
     private lateinit var analytics: FirebaseAnalytics
 
     private var mInterstitialAd: InterstitialAd? = null
@@ -69,7 +71,15 @@ class MainActivity : AppCompatActivity() {
                     initAds()
                 }
                 R.id.historyFragment -> {
-                 showAd()
+                    Log.d("MyLog", "count до нажатия на историю - $countAd")
+                    countAd++
+                    Log.d("MyLog", "count gjckt нажатия на историю - $countAd")
+                    if (countAd==6) {
+                        showAd()
+                        countAd=0
+                    }
+
+                 //showAd()
                     Log.d("MyLog","нажали на историю")
                     showBottomNav()
                     initAds()
@@ -121,7 +131,7 @@ class MainActivity : AppCompatActivity() {
 
         InterstitialAd.load(
             this,
-            "ca-app-pub-3940256099942544/1033173712",
+            "ca-app-pub-3971991853344828/1364337964",
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {

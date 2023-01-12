@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:adSize="LARGE_BANNER"
-            app:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
+            app:adUnitId="ca-app-pub-3971991853344828/7037706163"></com.google.android.gms.ads.AdView>
 
         <TextView
             android:id="@+id/textView"
