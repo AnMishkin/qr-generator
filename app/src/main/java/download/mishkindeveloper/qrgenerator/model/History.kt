@@ -17,7 +17,7 @@ data class History (
     @ColumnInfo(name = "addNameQr") val addNameQr: String,
     @ColumnInfo(name = "qr_text") val qrText: String,
     @ColumnInfo(name = "type") val type: String,
-    @ColumnInfo(name = "QR") val qr: Bitmap
+    //@ColumnInfo(name = "QR") val qr: Bitmap
         ): Parcelable {
 
 

@@ -2,6 +2,7 @@ package download.mishkindeveloper.qrgenerator.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import download.mishkindeveloper.qrgenerator.json.JsonToBase
 import download.mishkindeveloper.qrgenerator.model.History
 
 
@@ -10,6 +11,13 @@ interface HistoryDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addQrHistory(history: History)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addQrJsonToBase(jsonToBase: JsonToBase)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addListHistory(history: List<History>)
+
 
     @Insert
     suspend fun addNameQr(history: History)
@@ -23,7 +31,6 @@ interface HistoryDao {
     @Query("SELECT * FROM history_table ORDER BY id DESC")
     fun readAllData(): LiveData<List<History>>
 
-//    @Query("SELECT * FROM history_table ORDER BY id ASC")
-//    fun readAllDataForJson(): MutableList<History>
+
 
 }

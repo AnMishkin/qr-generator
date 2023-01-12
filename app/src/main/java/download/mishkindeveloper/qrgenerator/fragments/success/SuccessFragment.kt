@@ -1,12 +1,9 @@
 package download.mishkindeveloper.qrgenerator.fragments.success
 
 import android.Manifest
-import android.content.Context
-import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -127,7 +124,8 @@ class SuccessFragment : Fragment() {
 
         if (inputCheck(text)) {
             lifecycleScope.launch {
-                val history = History(text,addNameQr, qrText,  insertType, bmp)
+//                val history = History(text,addNameQr, qrText,  insertType, bmp)
+                val history = History(text,addNameQr, qrText,  insertType)
                 mDatabaseViewModel.addQrHistory(history)
             }
         }

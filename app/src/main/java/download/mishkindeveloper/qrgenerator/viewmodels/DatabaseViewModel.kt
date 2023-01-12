@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import download.mishkindeveloper.qrgenerator.data.HistoryDatabase
+import download.mishkindeveloper.qrgenerator.json.JsonToBase
 import download.mishkindeveloper.qrgenerator.model.History
 import download.mishkindeveloper.qrgenerator.repository.HistoryRepository
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +34,17 @@ class DatabaseViewModel(application: Application): AndroidViewModel(application)
     fun addQrHistory(history: History) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addQrHistory(history)
+        }
+    }
+    fun addListHistory(history: List<History>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addListHistory(history)
+        }
+    }
+
+    fun addQrJsonToBase(jsonToBase: JsonToBase) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addQrJsonToBase(jsonToBase)
         }
     }
 

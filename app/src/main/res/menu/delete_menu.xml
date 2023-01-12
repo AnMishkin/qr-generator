@@ -8,14 +8,14 @@
         android:icon="@drawable/ic_delete"
         android:iconTint="@color/white"
         app:showAsAction="ifRoom"
-        android:title="TODO"/>
+        android:title="@string/delete_item"/>
     <item
         android:id="@+id/export"
-        android:title="Export"
+        android:title="@string/export_file"
         android:icon="@drawable/ic_baseline_import_export_24"/>
     <item
-        android:id="@+id/imporT"
-        android:title="Import"
+        android:id="@+id/imports"
+        android:title="@string/import_file"
         />
 
 

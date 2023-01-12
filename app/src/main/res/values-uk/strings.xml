@@ -28,4 +28,12 @@
     <string name="sure_delete_qr">Ви впевнені, що хочете видалити цей QR?</string>
     <string name="fragment_history_name">QR з вашої історії</string>
     <string name="done">Готово!</string>
+    <string name="message_dont_save_json">Сталася помилка! Ваша база QR-кодів не збережена!</string>
+    <string name="message_save_json">Ваша база QR-кодів - збережена в папці завантажень!</string>
+    <string name="message_json_is_null">У Вас поки що нічого єкспортувати,створіть qr код</string>
+    <string name="message_no_file">Файл імпорту не знайден,перевірте його наявність у папці загрузки!</string>
+    <string name="delete_item">Видалити</string>
+    <string name="import_file">Імпорт файлу</string>
+    <string name="export_file">Eкспорт</string>
+
 </resources>

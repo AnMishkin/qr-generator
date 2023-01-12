@@ -63,7 +63,7 @@ suspend fun Fragment.saveQRtoStorage(displayName: String, bmp: Bitmap): Boolean 
 
         val contentValues = ContentValues().apply {
             sdk29AndUp {
-                put(MediaStore.Images.Media.RELATIVE_PATH, "QR Generator/QR Generator")
+                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/QR Generator")
             }
             put(MediaStore.Images.Media.MIME_TYPE, "Image/Jpeg")
             put(MediaStore.Images.Media.WIDTH, bmp.width)

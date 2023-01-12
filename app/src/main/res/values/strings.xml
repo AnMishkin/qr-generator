@@ -2,15 +2,15 @@
     <string name="app_name">QR GENERATOR</string>
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
-    <string name="facebook_paste">Paste your facebook</string>
+    <string name="facebook_paste" translatable="false">Paste your facebook</string>
     <string name="qr_creator" translatable="false">QR GENERATOR</string>
     <string name="generate">Generate</string>
     <string name="cleared">Cleared!</string>
     <string name="your_qr_code_has_been_generated">Your QR Code Has Been Generated</string>
-    <string name="link_text">Link / Text</string>
+    <string name="link_text" translatable="false">Link / Text</string>
     <string name="share_qr">Share</string>
     <string name="save_qr">Save QR</string>
-    <string name="instagram_hint">Drop your @ here : </string>
+    <string name="instagram_hint" translatable="false">Drop your @ here : </string>
     <string name="name_qr_hint">Enter name of QR...</string>
     <string name="link_qr_hint">Paste Link or Text Here...</string>
     <string name="create_qr">Create</string>
@@ -42,4 +42,14 @@
     <string name="fragment_history_name">QR from your story</string>
     <string name="done">Done!</string>
 
+<!--    экспорт/импорт-->
+    <string name="message_save_json">Your database of QR codes - saved in the download folder!</string>
+    <string name="message_dont_save_json">An error has occurred! Your database of QR codes is not saved!</string>
+    <string name="message_json_is_null">You have nothing to export yet, create a qr code!</string>
+    <string name="message_no_file">" The import file was not found, check its presence in the download folder!"</string>
+
+
+    <string name="delete_item">Delete</string>
+    <string name="export_file">Export</string>
+    <string name="import_file">Import</string>
 </resources>
