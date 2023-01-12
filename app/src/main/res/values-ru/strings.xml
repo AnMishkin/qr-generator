@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">QR GENERATOR</string>
+    <string name="generate">Гененировать</string>
+    <string name="cleared">Очищено!</string>
+    <string name="your_qr_code_has_been_generated">Ваш QR-код создано!</string>
+    <string name="share_qr">Поделится</string>
+    <string name="save_qr">Сохранить QR</string>
+    <string name="name_qr_hint">Введите название QR</string>
+    <string name="link_qr_hint">Вставьте сюда ссылку или текст...</string>
+    <string name="create_qr">Создать</string>
+    <string name="home">Главная</string>
+    <string name="history">История</string>
+    <string name="clear">Очистить все</string>
+    <string name="could_save_bitmap">Не получилось сохранить QR</string>
+    <string name="failed_to_share">Не получилось поделиться</string>
+    <string name="create_qr_first">Создайте сначала QR !</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="all_history_removed">История очищена!</string>
+    <string name="are_you_sure">Вы уверены?</string>
+    <string name="you_want_delete_all_history">Вы хотите удалить всю историю?</string>
+    <string name="fill_boxes">Пожалуйста,заполните текстовое поле или поле имени!</string>
+    <string name="photo_saved_ok">QR успешно сохранен!</string>
+    <string name="failed_save_photo">Не удалось сохранить QR !</string>
+    <string name="removed">Удалено</string>
+    <string name="delete">Удалить</string>
+    <string name="sure_delete_qr">Вы уверены, что хотите удалить этот QR ?</string>
+    <string name="fragment_history_name">QR из вашей истории</string>
+    <string name="done">Готово!</string>
+    <string name="message_save_json">Ваша база QR-кодов - сохранена в папке \"Загрузки\"!</string>
+    <string name="message_dont_save_json">Случилась ошибка! Ваша база QR-кодов не сохранена!</string>
+    <string name="message_json_is_null">У Вас пока что нечего экспортировать,создайте QR код!</string>
+    <string name="message_no_file">Файл импорта не найден,проверьте его наличие в папке \"Загрузки\"!</string>
+    <string name="delete_item">Удалить</string>
+    <string name="export_file">"Экспорт "</string>
+    <string name="import_file">Импорт</string>
+</resources>
