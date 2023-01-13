@@ -75,7 +75,7 @@
                     android:layout_marginRight="15dp"
                     android:backgroundTint="#1E2237"
                     android:text="@string/share_qr"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     app:icon="@drawable/ic_share"
                     app:iconGravity="textStart"
                     tools:ignore="TextContrastCheck" />
@@ -96,7 +96,7 @@
                     android:layout_marginTop="15dp"
                     android:backgroundTint="#1E2237"
                     android:text="@string/save_qr"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     app:icon="@drawable/ic_save"
                     app:iconGravity="textStart"
                     tools:ignore="TextContrastCheck" />
