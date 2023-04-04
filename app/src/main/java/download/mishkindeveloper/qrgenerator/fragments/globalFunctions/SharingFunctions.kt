@@ -5,8 +5,13 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
+import download.mishkindeveloper.qrgenerator.R
+import download.mishkindeveloper.qrgenerator.databinding.FragmentSuccessBinding
+import download.mishkindeveloper.qrgenerator.fragments.success.SuccessFragment
 import kotlinx.coroutines.InternalCoroutinesApi
 import java.io.File
 import java.io.FileOutputStream
@@ -53,6 +58,7 @@ try {
     contentUri = FileProvider.getUriForFile(context, context.applicationContext.packageName + ".provider" ,file)
 }catch (e: Exception) {
     showToast("${e.message}", context)
+
     Log.e("error", e.message.toString())
 }
 return contentUri

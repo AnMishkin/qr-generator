@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.work:work-runtime:2.7.0@aar">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/c52c3822ad287104e367ed52ceca82f4/transformed/work-runtime-2.7.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/c52c3822ad287104e367ed52ceca82f4/transformed/work-runtime-2.7.0/res" />
-      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/c52c3822ad287104e367ed52ceca82f4/transformed/work-runtime-2.7.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/c13b115f9e97be3d4d7dc3ec52e9cba8/transformed/work-runtime-2.7.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/c13b115f9e97be3d4d7dc3ec52e9cba8/transformed/work-runtime-2.7.0/res" />
+      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/c13b115f9e97be3d4d7dc3ec52e9cba8/transformed/work-runtime-2.7.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

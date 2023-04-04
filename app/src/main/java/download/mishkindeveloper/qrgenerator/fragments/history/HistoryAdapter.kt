@@ -1,8 +1,10 @@
 package download.mishkindeveloper.qrgenerator.fragments.history
 
 import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -41,10 +43,7 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
         private val type = binding.type
         private val text = binding.text
         private val nameQr = binding.nameQr
-
         private val delOneQr = binding.imDelete
-
-
 
 
         var rowLayout: ConstraintLayout = binding.rowLayout
@@ -94,10 +93,10 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
     }
 
 
-     fun toJson(): String? {
+    fun toJson(): String? {
         val allData = historyList
         val json = Gson().toJson(allData)
-return json
+        return json
     }
 
     fun giveOldHistoryList(): List<History> {
@@ -110,23 +109,23 @@ return json
     // Записать файл
 
     @OptIn(InternalCoroutinesApi::class)
-    fun HistoryFragment.showSnackBar(binding: FragmentHomeBinding ,message: String) {
+    fun HistoryFragment.showSnackBar(binding: FragmentHomeBinding, message: String) {
         val snackBar = Snackbar.make(
             binding.rootLayout,
             message,
             Snackbar.LENGTH_SHORT
         )
-        snackBar.setAction("Ok"){}
+        snackBar.setAction("Ok") {}
         snackBar.setActionTextColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
         snackBar.setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.blue))
         snackBar.show()
     }
 
 
-
     fun readFileJson(filePath: String, fileName: String): String {
         // Аналогично создается объект файла
-        val myFile = File(Environment.getExternalStorageDirectory().toString() + "/" + filePath + fileName)
+        val myFile =
+            File(Environment.getExternalStorageDirectory().toString() + "/" + filePath + fileName)
         try {
             val inputStream = FileInputStream(myFile)
 
@@ -152,9 +151,13 @@ return json
     }
 
 
-
-
+//    fun clickDelete() {
+//        //редактирование но не тут
+//        val editTextQr: ImageButton = binding.root.findViewById(R.id.imEditButton)
+//        editTextQr.setOnClickListener {
+//            Log.d("MyLog", "Нажали редактировать QR")
+//        }
+//    }
 
 }
-
 

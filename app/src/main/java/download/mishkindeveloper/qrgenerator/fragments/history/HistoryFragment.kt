@@ -6,19 +6,24 @@ import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.view.*
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import download.mishkindeveloper.qrgenerator.R
 import download.mishkindeveloper.qrgenerator.databinding.FragmentHistoryBinding
+import download.mishkindeveloper.qrgenerator.databinding.FragmentHomeBinding
 import download.mishkindeveloper.qrgenerator.fragments.globalFunctions.showToast
 import download.mishkindeveloper.qrgenerator.fragments.globalFunctions.updateOrRequestPermissions
 import download.mishkindeveloper.qrgenerator.fragments.qr.QrFragmentArgs
@@ -51,12 +56,12 @@ class HistoryFragment : Fragment() {
         binding = FragmentHistoryBinding.inflate(inflater , container, false)
 
 
-
         permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             readPermissionGranted = permissions[Manifest.permission.READ_EXTERNAL_STORAGE] ?: readPermissionGranted
             writePermissionGranted = permissions[Manifest.permission.WRITE_EXTERNAL_STORAGE] ?: writePermissionGranted
         }
         updateOrRequestPermissions(readPermissionGranted, writePermissionGranted, permissionLauncher)
+
 
 
 startHistoryView()
@@ -86,7 +91,8 @@ allHistoryInList()
         val recyclerViewEmpty = binding.recyclerView.isEmpty()
         if (item.itemId == R.id.delete_menu) {
             if (recyclerViewEmpty) {
-                showToast("$createFirst", requireContext())
+                showSnackBar(binding,"$createFirst")
+                //showToast("$createFirst", requireContext())
             } else {
                 deleteAllHistory()
 
@@ -101,7 +107,8 @@ allHistoryInList()
             if (logSize != null) {
                 if (jsonFile.isNullOrEmpty()||logSize<=2){
                     val message = resources.getText(R.string.message_json_is_null)
-                    Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
+                    showSnackBar(binding,message.toString())
+                    //Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
                     Log.d("MyLog", "длинна json файла - $logSize")
                 } else{
 
@@ -120,7 +127,8 @@ allHistoryInList()
 when (importTextFromJson){
     "FileNotFoundException" ->{
         val message = resources.getText(R.string.message_no_file)
-        Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
+        //Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
+        showSnackBar(binding,message.toString())
     }
     else -> {
         val interInBase = Gson().fromJson(importTextFromJson,JsonToBase::class.java)
@@ -139,7 +147,8 @@ when (importTextFromJson){
         }
         val list = concatenate(oldHistoryList, interInBase)
         mDatabaseViewModel.addListHistory(list)
-
+        val message = resources.getText(R.string.message_import_sucsess)
+        showSnackBar(binding,message.toString())
     }
 }
 
@@ -159,8 +168,8 @@ when (importTextFromJson){
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("$yes"){ _, _ ->
             mDatabaseViewModel.deleteAllHistory()
-            Toast.makeText(requireContext(), "$allHistoryDeleteText", Toast.LENGTH_LONG).show()
-
+           // Toast.makeText(requireContext(), "$allHistoryDeleteText", Toast.LENGTH_LONG).show()
+            showSnackBar(binding,allHistoryDeleteText.toString())
         }
 
         builder.setNegativeButton("$no"){_, _ -> }
@@ -182,13 +191,28 @@ when (importTextFromJson){
             myFile.createNewFile()
             val outputStream = FileOutputStream(myFile)
             outputStream.write(text.toByteArray())
+
             val message = resources.getText(R.string.message_save_json)
-            Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
+            //Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
+            showSnackBar(binding,message.toString())
         } catch (e: Exception) { 
             e.printStackTrace()
             val message = resources.getText(R.string.message_dont_save_json)
-            Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
+            //Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
+            showSnackBar(binding,message.toString())
         }
     }
 
+    @OptIn(InternalCoroutinesApi::class)
+    fun HistoryFragment.showSnackBar(binding: FragmentHistoryBinding, message: String) {
+        val snackBar = Snackbar.make(
+            binding.root,
+            message,
+            Snackbar.LENGTH_SHORT
+        )
+        snackBar.setAction("Ok") {}
+        snackBar.setActionTextColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
+        snackBar.setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.blue))
+        snackBar.show()
+    }
 }

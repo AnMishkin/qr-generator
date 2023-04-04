@@ -14,7 +14,7 @@ android {
         applicationId "download.mishkindeveloper.qrgenerator"
         minSdk 21
         targetSdk 33
-        versionCode 2
+        versionCode 7
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -41,15 +41,15 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
-    implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.1'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.3'
     implementation 'com.google.firebase:firebase-analytics:21.2.0'
     apply plugin: "androidx.navigation.safeargs.kotlin"
 
@@ -57,29 +57,29 @@ dependencies {
     implementation("io.coil-kt:coil:2.0.0-rc03")
 
     // Room components
-    implementation "androidx.room:room-runtime:2.4.2"
-    kapt "androidx.room:room-compiler:2.4.2"
-    implementation "androidx.room:room-ktx:2.4.2"
-    androidTestImplementation "androidx.room:room-testing:2.4.2"
+    implementation "androidx.room:room-runtime:2.5.0"
+    kapt "androidx.room:room-compiler:2.5.0"
+    implementation "androidx.room:room-ktx:2.5.0"
+    androidTestImplementation "androidx.room:room-testing:2.5.0"
 
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-common-java8:2.4.1"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
 
     // Kotlin components
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.20"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.0"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
     //QRGenerator
     implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.4'
     implementation 'com.google.zxing:core:3.3.2'
 
     testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     //для json
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.12.1'
@@ -87,9 +87,9 @@ dependencies {
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.12.1'
     implementation 'com.google.code.gson:gson:2.9.0'
 
-    implementation 'com.google.android.gms:play-services-ads:21.4.0'
+    implementation 'com.google.android.gms:play-services-ads:21.5.0'
 
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'
-
+    implementation 'com.google.firebase:firebase-core:21.1.1'
 }

@@ -47,6 +47,8 @@
     <string name="message_dont_save_json">An error has occurred! Your database of QR codes is not saved!</string>
     <string name="message_json_is_null">You have nothing to export yet, create a qr code!</string>
     <string name="message_no_file">" The import file was not found, check its presence in the download folder!"</string>
+    <string name="message_import_sucsess">"Your import file with QR codes has been successfully added to the application!"</string>
+
 
 
     <string name="delete_item">Delete</string>

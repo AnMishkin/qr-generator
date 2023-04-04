@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,13 +14,16 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
+import com.google.android.material.snackbar.Snackbar
 import download.mishkindeveloper.qrgenerator.R
+import download.mishkindeveloper.qrgenerator.databinding.FragmentHistoryBinding
 import download.mishkindeveloper.qrgenerator.databinding.FragmentQrBinding
 import download.mishkindeveloper.qrgenerator.fragments.globalFunctions.generateQr
 import download.mishkindeveloper.qrgenerator.fragments.globalFunctions.saveQRtoStorage
 import download.mishkindeveloper.qrgenerator.fragments.globalFunctions.shareQr
 import download.mishkindeveloper.qrgenerator.fragments.globalFunctions.showToast
 import download.mishkindeveloper.qrgenerator.fragments.history.HistoryAdapter
+import download.mishkindeveloper.qrgenerator.fragments.history.HistoryFragment
 import download.mishkindeveloper.qrgenerator.viewmodels.DatabaseViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -90,9 +94,11 @@ class QrFragment : Fragment() {
             lifecycleScope.launch {
                 if (!writePermissionGranted) {
                     saveQRtoStorage(nameQr, bmp)
-                    showToast("$photoSavedOk", requireContext())
+                    showSnackBar(binding,"$photoSavedOk")
+                    //showToast("$photoSavedOk", requireContext())
                 } else {
-                    showToast("$failedSavePhoto", requireContext())
+                    //showToast("$failedSavePhoto", requireContext())
+                    showSnackBar(binding,"$failedSavePhoto")
                 }
             }
         }
@@ -127,7 +133,8 @@ class QrFragment : Fragment() {
         builder.setPositiveButton("$yes"){ _, _ ->
             mDatabaseViewModel.deleteQrHistory(args.currentQR)
 //adapterHistory.notifyDataSetChanged()
-            Toast.makeText(requireContext(), "$removed ${args.currentQR.type}", Toast.LENGTH_SHORT).show()
+            showSnackBar(binding,"$removed ${args.currentQR.type}")
+            //Toast.makeText(requireContext(), "$removed ${args.currentQR.type}", Toast.LENGTH_SHORT).show()
         findNavController().navigateUp()
 
         }
@@ -137,5 +144,17 @@ class QrFragment : Fragment() {
         builder.create().show()
     }
 
+    @OptIn(InternalCoroutinesApi::class)
+    fun QrFragment.showSnackBar(binding: FragmentQrBinding, message: String) {
+        val snackBar = Snackbar.make(
+            binding.root,
+            message,
+            Snackbar.LENGTH_SHORT
+        )
+        snackBar.setAction("Ok") {}
+        snackBar.setActionTextColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
+        snackBar.setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.blue))
+        snackBar.show()
+    }
 
 }

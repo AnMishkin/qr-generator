@@ -35,5 +35,6 @@
     <string name="delete_item">Видалити</string>
     <string name="import_file">"Імпорт "</string>
     <string name="export_file">Eкспорт</string>
+    <string name="message_import_sucsess">Ваш файл імпорту з QR кодами - успішно додан до додатку!</string>
 
 </resources>

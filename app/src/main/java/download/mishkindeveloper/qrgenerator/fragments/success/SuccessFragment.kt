@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,9 +18,12 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
+import com.google.android.material.snackbar.Snackbar
 import download.mishkindeveloper.qrgenerator.R
+import download.mishkindeveloper.qrgenerator.databinding.FragmentQrBinding
 import download.mishkindeveloper.qrgenerator.databinding.FragmentSuccessBinding
 import download.mishkindeveloper.qrgenerator.fragments.globalFunctions.*
+import download.mishkindeveloper.qrgenerator.fragments.qr.QrFragment
 import download.mishkindeveloper.qrgenerator.model.History
 import download.mishkindeveloper.qrgenerator.viewmodels.DatabaseViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -95,9 +99,11 @@ class SuccessFragment : Fragment() {
             lifecycleScope.launch {
                if (!writePermissionGranted) {
                     saveQRtoStorage(UUID.randomUUID().toString(), bitmap)
-                    showToast("$savedOk", requireContext())
+                   // showToast("$savedOk", requireContext())
+                   showSnackBar(binding,"$savedOk")
                 } else {
-                    showToast("$failedSavedPhoto", requireContext())
+                    //showToast("$failedSavedPhoto", requireContext())
+                   showSnackBar(binding,"$failedSavedPhoto")
                 }
             }
         }
@@ -136,7 +142,18 @@ class SuccessFragment : Fragment() {
         return !(TextUtils.isEmpty(text))
     }
 
-
+    @OptIn(InternalCoroutinesApi::class)
+    fun SuccessFragment.showSnackBar(binding: FragmentSuccessBinding, message: String) {
+        val snackBar = Snackbar.make(
+            binding.root,
+            message,
+            Snackbar.LENGTH_SHORT
+        )
+        snackBar.setAction("Ok") {}
+        snackBar.setActionTextColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
+        snackBar.setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.blue))
+        snackBar.show()
+    }
 
 
 }

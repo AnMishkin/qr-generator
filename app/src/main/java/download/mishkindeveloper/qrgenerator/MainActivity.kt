@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                     Log.d("MyLog", "count до нажатия на историю - $countAd")
                     countAd++
                     Log.d("MyLog", "count gjckt нажатия на историю - $countAd")
-                    if (countAd==6) {
+                    if (countAd==4) {
                         showAd()
                         countAd=0
                     }
@@ -135,7 +135,7 @@ class MainActivity : AppCompatActivity() {
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
-                    Log.d(TAG, adError?.toString())
+                    Log.d(TAG, adError.toString())
                     mInterstitialAd = null
                     initAds()
                 }

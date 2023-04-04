@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.recyclerview:recyclerview:1.1.0@aar">
     <ANNOTATIONS>
-      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/8da72bc6d3fd70b102f8037d510216a8/transformed/recyclerview-1.1.0/annotations.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/a31dc40ec2b7bc7bd9066782d74c8dd3/transformed/recyclerview-1.1.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/8da72bc6d3fd70b102f8037d510216a8/transformed/recyclerview-1.1.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/8da72bc6d3fd70b102f8037d510216a8/transformed/recyclerview-1.1.0/res" />
-      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/8da72bc6d3fd70b102f8037d510216a8/transformed/recyclerview-1.1.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/a31dc40ec2b7bc7bd9066782d74c8dd3/transformed/recyclerview-1.1.0/res" />
+      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/a31dc40ec2b7bc7bd9066782d74c8dd3/transformed/recyclerview-1.1.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/a31dc40ec2b7bc7bd9066782d74c8dd3/transformed/recyclerview-1.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

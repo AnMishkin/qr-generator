@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.gms:play-services-measurement-sdk-api:21.2.0@aar">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/6a99b2d9e4e7f386e1b033e3df341136/transformed/jetified-play-services-measurement-sdk-api-21.2.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/6a99b2d9e4e7f386e1b033e3df341136/transformed/jetified-play-services-measurement-sdk-api-21.2.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/8f1bf7b250a26fc8b4e6b139c97f2948/transformed/jetified-play-services-measurement-sdk-api-21.2.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/8f1bf7b250a26fc8b4e6b139c97f2948/transformed/jetified-play-services-measurement-sdk-api-21.2.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-measurement-sdk-api/21.2.0/e30555d01f4b419de1eed6ceed27b98aedecf946/play-services-measurement-sdk-api-21.2.0-javadoc.jar!/" />
