@@ -2,12 +2,13 @@ package download.mishkindeveloper.qrgenerator.fragments.history
 
 import android.Manifest
 import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.view.*
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.SearchView
+import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -15,7 +16,6 @@ import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -23,8 +23,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import download.mishkindeveloper.qrgenerator.R
 import download.mishkindeveloper.qrgenerator.databinding.FragmentHistoryBinding
-import download.mishkindeveloper.qrgenerator.databinding.FragmentHomeBinding
-import download.mishkindeveloper.qrgenerator.fragments.globalFunctions.showToast
 import download.mishkindeveloper.qrgenerator.fragments.globalFunctions.updateOrRequestPermissions
 import download.mishkindeveloper.qrgenerator.fragments.qr.QrFragmentArgs
 import download.mishkindeveloper.qrgenerator.json.JsonToBase
@@ -33,6 +31,7 @@ import download.mishkindeveloper.qrgenerator.viewmodels.DatabaseViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
 import java.io.File
 import java.io.FileOutputStream
+import java.util.*
 
 
 @InternalCoroutinesApi
@@ -41,13 +40,15 @@ class HistoryFragment : Fragment() {
     private lateinit var binding: FragmentHistoryBinding
     private val mDatabaseViewModel: DatabaseViewModel by viewModels()
     private val adapter = HistoryAdapter()
+
+
     private val mapper = jacksonObjectMapper()
     private var historyList = emptyList<History>()
     private val args by navArgs<QrFragmentArgs>()
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
     private var readPermissionGranted = false
     private var writePermissionGranted = false
-
+    private var searchView: SearchView? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,14 +63,19 @@ class HistoryFragment : Fragment() {
         }
         updateOrRequestPermissions(readPermissionGranted, writePermissionGranted, permissionLauncher)
 
+        //search
+//        searchView = binding.root.findViewById(R.id.search)
+//        searchView?.clearFocus()
 
 
-startHistoryView()
+        startHistoryView()
 
-allHistoryInList()
+        allHistoryInList()
 
         setHasOptionsMenu(true)
         return binding.root
+
+        //кнопка поиска
 
 
     }
@@ -82,8 +88,40 @@ allHistoryInList()
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-
         inflater.inflate(R.menu.delete_menu,menu)
+        var menuItem = menu?.findItem(R.id.search)
+        var searchView : SearchView = menuItem.actionView as SearchView
+        searchView?.queryHint = resources.getString(R.string.searchHint)
+
+
+        val searchItem = menu.findItem(R.id.search)
+        if (searchItem != null) {
+            val searchView = searchItem.actionView as SearchView?
+            val searchTextViewId = searchView!!.context.resources
+                .getIdentifier("android:id/search_src_text", null, null)
+            val searchTextView = searchView.findViewById<View>(searchTextViewId) as TextView
+            searchTextView.setTextColor(Color.WHITE) // установка цвета текста
+        }
+
+
+
+
+
+
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                // filterList(newText)
+                return true
+            }
+
+        })
+        return super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -98,6 +136,7 @@ allHistoryInList()
 
             }
         }
+
 
         //экспорт json файла
         if (item.itemId==R.id.export){
@@ -115,8 +154,6 @@ allHistoryInList()
                     writeFileJson("download/","QR Generator Base.json", jsonFile)
                 }
             }
-
-
         }
 
         //импорт json файла
@@ -124,33 +161,33 @@ allHistoryInList()
 
             val importTextFromJson = adapter.readFileJson("download/", "QR Generator base.json")
 
-when (importTextFromJson){
-    "FileNotFoundException" ->{
-        val message = resources.getText(R.string.message_no_file)
-        //Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
-        showSnackBar(binding,message.toString())
-    }
-    else -> {
-        val interInBase = Gson().fromJson(importTextFromJson,JsonToBase::class.java)
-        val interInBaseCount = interInBase.size
-        Log.d("MyLog", "счетчик файла импорта - $interInBaseCount")
-        val oldHistoryList = adapter.giveOldHistoryList()
-        mDatabaseViewModel.deleteAllHistory()
-        mDatabaseViewModel.addQrJsonToBase(interInBase)
+            when (importTextFromJson){
+                "FileNotFoundException" ->{
+                    val message = resources.getText(R.string.message_no_file)
+                    //Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
+                    showSnackBar(binding,message.toString())
+                }
+                else -> {
+                    val interInBase = Gson().fromJson(importTextFromJson,JsonToBase::class.java)
+                    val interInBaseCount = interInBase.size
+                    Log.d("MyLog", "счетчик файла импорта - $interInBaseCount")
+                    val oldHistoryList = adapter.giveOldHistoryList()
+                    mDatabaseViewModel.deleteAllHistory()
+                    mDatabaseViewModel.addQrJsonToBase(interInBase)
 
-        fun <T> concatenate(vararg lists: List<T>): List<T> {
-            val result: MutableList<T> = ArrayList()
-            for (list in lists) {
-                result += list
+                    fun <T> concatenate(vararg lists: List<T>): List<T> {
+                        val result: MutableList<T> = ArrayList()
+                        for (list in lists) {
+                            result += list
+                        }
+                        return result
+                    }
+                    val list = concatenate(oldHistoryList, interInBase)
+                    mDatabaseViewModel.addListHistory(list)
+                    val message = resources.getText(R.string.message_import_sucsess)
+                    showSnackBar(binding,message.toString())
+                }
             }
-            return result
-        }
-        val list = concatenate(oldHistoryList, interInBase)
-        mDatabaseViewModel.addListHistory(list)
-        val message = resources.getText(R.string.message_import_sucsess)
-        showSnackBar(binding,message.toString())
-    }
-}
 
 
         }
@@ -158,7 +195,7 @@ when (importTextFromJson){
         return super.onOptionsItemSelected(item)
     }
 
-     fun deleteAllHistory() {
+    fun deleteAllHistory() {
         val yes  = resources.getText(R.string.yes)
         val no  = resources.getText(R.string.no)
         val allHistoryDeleteText  = resources.getText(R.string.all_history_removed)
@@ -168,7 +205,7 @@ when (importTextFromJson){
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("$yes"){ _, _ ->
             mDatabaseViewModel.deleteAllHistory()
-           // Toast.makeText(requireContext(), "$allHistoryDeleteText", Toast.LENGTH_LONG).show()
+            // Toast.makeText(requireContext(), "$allHistoryDeleteText", Toast.LENGTH_LONG).show()
             showSnackBar(binding,allHistoryDeleteText.toString())
         }
 
@@ -178,7 +215,7 @@ when (importTextFromJson){
         builder.create().show()
     }
 
-     fun startHistoryView(){
+    fun startHistoryView(){
         val recyclerView = binding.recyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -195,7 +232,7 @@ when (importTextFromJson){
             val message = resources.getText(R.string.message_save_json)
             //Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
             showSnackBar(binding,message.toString())
-        } catch (e: Exception) { 
+        } catch (e: Exception) {
             e.printStackTrace()
             val message = resources.getText(R.string.message_dont_save_json)
             //Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
@@ -215,4 +252,5 @@ when (importTextFromJson){
         snackBar.setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.blue))
         snackBar.show()
     }
+
 }

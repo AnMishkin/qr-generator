@@ -41,6 +41,8 @@
     </string-array>
     <string name="fragment_history_name">QR from your story</string>
     <string name="done">Done!</string>
+    <string name="searchHint">Search here...</string>
+
 
 <!--    экспорт/импорт-->
     <string name="message_save_json">Your database of QR codes - saved in the download folder!</string>
@@ -54,4 +56,14 @@
     <string name="delete_item">Delete</string>
     <string name="export_file">Export</string>
     <string name="import_file">Import</string>
+
+
+    <string name="ad_attribution" translatable="false">Ad</string>
+    <string name="ad_call_to_action_text" translatable="false">Install</string>
+    <string name="ad_app_icon_content_description" translatable="false">icon</string>
+
+
+
+
+
 </resources>

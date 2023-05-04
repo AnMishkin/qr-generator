@@ -4,6 +4,7 @@ import android.Manifest
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,6 +54,12 @@ class SuccessFragment : Fragment() {
         // Inflate the layout for this fragment
        binding =  FragmentSuccessBinding.inflate(inflater, container, false)
 
+        //банерная реклама
+        MobileAds.initialize(this.requireContext()) {}
+        mAdView = binding.adViewSuccess
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+        //конец банерная реклама
 
         permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             readPermissionGranted = permissions[Manifest.permission.READ_EXTERNAL_STORAGE] ?: readPermissionGranted
@@ -74,7 +81,7 @@ class SuccessFragment : Fragment() {
                 binding.saveQR.isVisible = false
                 binding.textView.isVisible = false
                 binding.nameQrSuccess.isVisible = false
-                binding.adView.isVisible = false
+                binding.adViewSuccess.isVisible = false
             }
             if (isImageScaled) {
                 R.style.Theme_AppCompat_DayNight_NoActionBar
@@ -83,7 +90,7 @@ class SuccessFragment : Fragment() {
                 binding.saveQR.isVisible = true
                 binding.textView.isVisible = true
                 binding.nameQrSuccess.isVisible = true
-                binding.adView.isVisible = true
+                binding.adViewSuccess.isVisible = true
             }
             isImageScaled = !isImageScaled
         }
@@ -108,12 +115,7 @@ class SuccessFragment : Fragment() {
             }
         }
 
-        //банерная реклама
-        MobileAds.initialize(this.requireContext()) {}
-        mAdView = binding.adView
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-        //конец банерная реклама
+
 
         return binding.root
     }

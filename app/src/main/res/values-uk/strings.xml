@@ -36,5 +36,6 @@
     <string name="import_file">"Імпорт "</string>
     <string name="export_file">Eкспорт</string>
     <string name="message_import_sucsess">Ваш файл імпорту з QR кодами - успішно додан до додатку!</string>
+    <string name="searchHint">Пошук....</string>
 
 </resources>

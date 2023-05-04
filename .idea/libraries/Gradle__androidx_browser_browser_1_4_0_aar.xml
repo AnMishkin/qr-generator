@@ -4,9 +4,9 @@
       <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/b7ec022b0af1bbcbab8a910349bcbf19/transformed/browser-1.4.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/b7ec022b0af1bbcbab8a910349bcbf19/transformed/browser-1.4.0/AndroidManifest.xml" />
       <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/b7ec022b0af1bbcbab8a910349bcbf19/transformed/browser-1.4.0/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/b7ec022b0af1bbcbab8a910349bcbf19/transformed/browser-1.4.0/res" />
+      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/b7ec022b0af1bbcbab8a910349bcbf19/transformed/browser-1.4.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

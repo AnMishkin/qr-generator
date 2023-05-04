@@ -7,6 +7,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdLoader
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
@@ -16,7 +17,7 @@ import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
-    private lateinit var mAdView : AdView
+    private lateinit var mAdView: AdView
     private lateinit var binding: FragmentHomeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,18 +26,24 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        //банерная реклама
+        MobileAds.initialize(requireContext())
+        mAdView = binding.adViewHome
+
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         setHasOptionsMenu(true)
 val editText = binding.plainText
 
         var home = R.layout.fragment_home
 
-        //банерная реклама
-        MobileAds.initialize(this.requireContext()) {}
-        mAdView = binding.adView
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-        //конец банерная реклама
+//        //банерная реклама
+//        MobileAds.initialize(this.requireContext()) {}
+//        mAdView = binding.adView
+//        val adRequest = AdRequest.Builder().build()
+//        mAdView.loadAd(adRequest)
+//        //конец банерная реклама
 
         linkAndTextRequest(binding)
             binding.clear.setOnClickListener {
@@ -51,15 +58,16 @@ val editText = binding.plainText
 
     }
 
-
-
+    override fun onDestroy() {
+        mAdView.destroy()
+        super.onDestroy()
+    }
 
     override fun onResume() {
         super.onResume()
         instagramRequest(binding)
         facebookRequest(binding)
         linkAndTextRequest(binding)
-
     }
 
 

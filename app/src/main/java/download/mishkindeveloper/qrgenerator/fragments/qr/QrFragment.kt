@@ -47,6 +47,13 @@ class QrFragment : Fragment() {
         // Inflate the layout for this fragment
         binding =  FragmentQrBinding.inflate(inflater, container, false)
 
+        //банерная реклама
+        MobileAds.initialize(this.requireContext()) {}
+        mAdView = binding.adViewQrFragment
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+        //конец банерная реклама
+
         //увеличение картинки
         binding.imageView.setOnClickListener { v ->
             if (!isImageScaled) {
@@ -55,7 +62,7 @@ class QrFragment : Fragment() {
                 binding.saveQR.isVisible = false
                 binding.type.isVisible = false
                 binding.qrGeneratedText.isVisible = false
-                binding.adView.isVisible = false
+                binding.adViewQrFragment.isVisible = false
             }
             if (isImageScaled) {
                 R.style.Theme_AppCompat_DayNight_NoActionBar
@@ -64,7 +71,7 @@ class QrFragment : Fragment() {
                 binding.saveQR.isVisible = true
                 binding.type.isVisible = true
                 binding.qrGeneratedText.isVisible = true
-                binding.adView.isVisible = true
+                binding.adViewQrFragment.isVisible = true
             }
             isImageScaled = !isImageScaled
         }
@@ -102,18 +109,15 @@ class QrFragment : Fragment() {
                 }
             }
         }
-        //банерная реклама
-        MobileAds.initialize(this.requireContext()) {}
-        mAdView = binding.adView
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-        //конец банерная реклама
+
 
         return  binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.delete_menu,menu)
+        var menuItem = menu?.findItem(R.id.search)
+        menuItem.isVisible = false
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

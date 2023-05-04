@@ -149,17 +149,19 @@
     </LinearLayout>
 
     <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
+        android:id="@+id/adViewHome"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:adSize="LARGE_BANNER"
-        app:adUnitId="ca-app-pub-3971991853344828/3621103700"
+        app:adUnitId="ca-app-pub-3971991853344828/9214581161"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.247"></com.google.android.gms.ads.AdView>
+        app:layout_constraintVertical_bias="0.247" />
 
 
 <!--    <com.google.android.gms.ads.AdView-->

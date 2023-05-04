@@ -3,6 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/search"
+        android:icon="@drawable/baseline_search_24"
+        android:title=""
+        android:iconTint="@color/white"
+        android:titleTextColor="@android:color/white"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always"
+        app:theme="@style/toolbar" />
+    <item
 
         android:id="@+id/delete_menu"
         android:icon="@drawable/ic_delete"

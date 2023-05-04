@@ -4,6 +4,8 @@ import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -23,10 +25,11 @@ import java.io.*
 
 
 
-class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>(), Filterable  {
 
     val mapper = jacksonObjectMapper()
     private var historyList = emptyList<History>()
+    private var historyListFiltered = emptyList<History>()
 
     //для сохранения json файла
     private var fileName: String? = "QR Generator base.json"
@@ -89,6 +92,7 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     fun setData(history: List<History>) {
         this.historyList = history
+        this.historyListFiltered = history
         notifyDataSetChanged()
     }
 
@@ -150,6 +154,38 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
         }
     }
 
+    override fun getFilter(): Filter {
+        var filter = object : Filter() {
+            override fun performFiltering(p0: CharSequence?): FilterResults {
+                val filterResults = FilterResults()
+                if (p0 == null || p0.isEmpty()) {
+                    filterResults.values = historyListFiltered
+                    filterResults.count = historyListFiltered.size
+                } else {
+                    var searchChar = p0.toString().lowercase()
+                    var filteredResults = ArrayList<History>()
+
+                    for (item in historyListFiltered) {
+                        if (item.type.lowercase().contains(searchChar)){
+                            filteredResults.add(item)
+                        }
+                    }
+                    filterResults.values = filteredResults
+                    filterResults.count = filteredResults.size
+                }
+                return filterResults
+            }
+
+            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+                historyList = p1!!.values as List<History>
+                notifyDataSetChanged()
+            }
+
+        }
+
+return filter
+    }
+
 
 //    fun clickDelete() {
 //        //редактирование но не тут
@@ -160,4 +196,3 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 //    }
 
 }
-

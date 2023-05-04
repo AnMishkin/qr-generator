@@ -55,12 +55,14 @@
             tools:src="@tools:sample/avatars" />
 
         <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
+            android:id="@+id/adViewSuccess"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginTop="10dp"
             app:adSize="LARGE_BANNER"
-            app:adUnitId="ca-app-pub-3971991853344828/7037706163"></com.google.android.gms.ads.AdView>
+            app:adUnitId="ca-app-pub-3971991853344828/7037706163"/>
 
         <TextView
             android:id="@+id/textView"

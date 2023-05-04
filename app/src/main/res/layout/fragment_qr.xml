@@ -39,11 +39,11 @@
             tools:src="@tools:sample/avatars" />
 
         <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
+            android:id="@+id/adViewQrFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:adSize="LARGE_BANNER"
-            app:adUnitId="ca-app-pub-3971991853344828/4231316094"></com.google.android.gms.ads.AdView>
+            app:adUnitId="ca-app-pub-3971991853344828/4231316094"/>
 
         <TextView
             android:id="@+id/qrGeneratedText"
