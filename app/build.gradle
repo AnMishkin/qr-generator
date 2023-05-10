@@ -14,7 +14,7 @@ android {
         applicationId "download.mishkindeveloper.qrgenerator"
         minSdk 21
         targetSdk 33
-        versionCode 7
+        versionCode 10
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -25,7 +25,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             consumerProguardFiles 'proguard-rules.pgcfg'
         }

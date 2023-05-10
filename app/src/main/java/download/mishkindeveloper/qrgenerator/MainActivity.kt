@@ -2,7 +2,6 @@ package download.mishkindeveloper.qrgenerator
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings.System.putInt
@@ -12,9 +11,9 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+
 import com.google.android.gms.ads.*
 import download.mishkindeveloper.qrgenerator.databinding.ActivityMainBinding
 import com.google.android.gms.ads.interstitial.InterstitialAd;
