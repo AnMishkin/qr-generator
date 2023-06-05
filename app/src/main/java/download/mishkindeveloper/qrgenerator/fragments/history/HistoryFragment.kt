@@ -1,38 +1,38 @@
 package download.mishkindeveloper.qrgenerator.fragments.history
 
-import android.Manifest
-import android.app.AlertDialog
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.view.*
-import android.widget.SearchView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat
-import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import download.mishkindeveloper.qrgenerator.R
+import download.mishkindeveloper.qrgenerator.admob_advanced_native_recyvlerview.AdmobNativeAdAdapter
 import download.mishkindeveloper.qrgenerator.databinding.FragmentHistoryBinding
 import download.mishkindeveloper.qrgenerator.fragments.globalFunctions.updateOrRequestPermissions
-import download.mishkindeveloper.qrgenerator.fragments.qr.QrFragmentArgs
 import download.mishkindeveloper.qrgenerator.json.JsonToBase
 import download.mishkindeveloper.qrgenerator.model.History
 import download.mishkindeveloper.qrgenerator.viewmodels.DatabaseViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
 import java.io.File
 import java.io.FileOutputStream
-import java.util.*
-
+import java.io.InputStream
+import java.util.ArrayList
 
 @InternalCoroutinesApi
 class HistoryFragment : Fragment() {
@@ -40,26 +40,25 @@ class HistoryFragment : Fragment() {
     private lateinit var binding: FragmentHistoryBinding
     private val mDatabaseViewModel: DatabaseViewModel by viewModels()
     private val adapter = HistoryAdapter()
-
-
-    private val mapper = jacksonObjectMapper()
     private var historyList = emptyList<History>()
-    private val args by navArgs<QrFragmentArgs>()
+    private var searchView: SearchView? = null
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
     private var readPermissionGranted = false
     private var writePermissionGranted = false
-    private var searchView: SearchView? = null
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentHistoryBinding.inflate(inflater , container, false)
 
+    companion object {
+        private const val EXPORT_REQUEST_CODE = 1
+        private const val IMPORT_REQUEST_CODE = 2
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentHistoryBinding.inflate(inflater, container, false)
+
+        setHasOptionsMenu(true)
 
         permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-            readPermissionGranted = permissions[Manifest.permission.READ_EXTERNAL_STORAGE] ?: readPermissionGranted
-            writePermissionGranted = permissions[Manifest.permission.WRITE_EXTERNAL_STORAGE] ?: writePermissionGranted
+            readPermissionGranted = permissions[android.Manifest.permission.READ_EXTERNAL_STORAGE] ?: readPermissionGranted
+            writePermissionGranted = permissions[android.Manifest.permission.WRITE_EXTERNAL_STORAGE] ?: writePermissionGranted
         }
         updateOrRequestPermissions(readPermissionGranted, writePermissionGranted, permissionLauncher)
 
@@ -67,46 +66,26 @@ class HistoryFragment : Fragment() {
 //        searchView = binding.root.findViewById(R.id.search)
 //        searchView?.clearFocus()
 
-
-        startHistoryView()
-
-        allHistoryInList()
-
-        setHasOptionsMenu(true)
+        setupRecyclerView()
+        observeHistoryData()
+        activity?.let { MobileAds.initialize(it) {} }
         return binding.root
-
-        //кнопка поиска
-
-
     }
-
-    private fun allHistoryInList(){
-        mDatabaseViewModel.readAllData.observe(viewLifecycleOwner, Observer {
-            adapter.setData(it)
-        })
-    }
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.delete_menu,menu)
+        inflater.inflate(R.menu.delete_menu, menu)
         var menuItem = menu?.findItem(R.id.search)
-        var searchView : SearchView = menuItem.actionView as SearchView
+        val searchView = menu.findItem(R.id.search).actionView as SearchView
+
         searchView?.queryHint = resources.getString(R.string.searchHint)
-
-
         val searchItem = menu.findItem(R.id.search)
         if (searchItem != null) {
             val searchView = searchItem.actionView as SearchView?
             val searchTextViewId = searchView!!.context.resources
                 .getIdentifier("android:id/search_src_text", null, null)
-            val searchTextView = searchView.findViewById<View>(searchTextViewId) as TextView
-            searchTextView.setTextColor(Color.WHITE) // установка цвета текста
-        }
-
-
-
-
-
+            val searchTextView = searchView?.findViewById<View>(searchTextViewId) as? TextView
+            searchTextView?.setTextColor(Color.WHITE)         // установка цвета текста
+             }
 
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -121,78 +100,55 @@ class HistoryFragment : Fragment() {
             }
 
         })
-        return super.onCreateOptionsMenu(menu, inflater)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val createFirst = resources.getText(R.string.create_qr_first)
-        val recyclerViewEmpty = binding.recyclerView.isEmpty()
-        if (item.itemId == R.id.delete_menu) {
-            if (recyclerViewEmpty) {
-                showSnackBar(binding,"$createFirst")
-                //showToast("$createFirst", requireContext())
-            } else {
-                deleteAllHistory()
-
-            }
+        when (item.itemId) {
+            R.id.export -> exportFile()
+            R.id.imports -> importFile()
+            R.id.delete_menu -> deleteAllHistory()
         }
-
-
-        //экспорт json файла
-        if (item.itemId==R.id.export){
-//adapter.toJson()
-            val jsonFile = adapter.toJson()
-            val logSize = jsonFile?.length
-            if (logSize != null) {
-                if (jsonFile.isNullOrEmpty()||logSize<=2){
-                    val message = resources.getText(R.string.message_json_is_null)
-                    showSnackBar(binding,message.toString())
-                    //Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
-                    Log.d("MyLog", "длинна json файла - $logSize")
-                } else{
-
-                    writeFileJson("download/","QR Generator Base.json", jsonFile)
-                }
-            }
-        }
-
-        //импорт json файла
-        if (item.itemId==R.id.imports){
-
-            val importTextFromJson = adapter.readFileJson("download/", "QR Generator base.json")
-
-            when (importTextFromJson){
-                "FileNotFoundException" ->{
-                    val message = resources.getText(R.string.message_no_file)
-                    //Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
-                    showSnackBar(binding,message.toString())
-                }
-                else -> {
-                    val interInBase = Gson().fromJson(importTextFromJson,JsonToBase::class.java)
-                    val interInBaseCount = interInBase.size
-                    Log.d("MyLog", "счетчик файла импорта - $interInBaseCount")
-                    val oldHistoryList = adapter.giveOldHistoryList()
-                    mDatabaseViewModel.deleteAllHistory()
-                    mDatabaseViewModel.addQrJsonToBase(interInBase)
-
-                    fun <T> concatenate(vararg lists: List<T>): List<T> {
-                        val result: MutableList<T> = ArrayList()
-                        for (list in lists) {
-                            result += list
-                        }
-                        return result
-                    }
-                    val list = concatenate(oldHistoryList, interInBase)
-                    mDatabaseViewModel.addListHistory(list)
-                    val message = resources.getText(R.string.message_import_sucsess)
-                    showSnackBar(binding,message.toString())
-                }
-            }
-
-
-        }
-
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupRecyclerView() {
+        val currentAdapter = adapter
+        if (currentAdapter != null) {
+            val nativeAdId = "ca-app-pub-3971991853344828/9607333997"
+            val nativeAdsType = "small" // Замените на "small", "medium" или "custom"
+            val interval = 5 // Замените на желаемый интервал повторения рекламы
+            val admobNativeAdAdapter = AdmobNativeAdAdapter.Builder
+                .with(nativeAdId, currentAdapter, nativeAdsType)
+                .adItemIterval(interval)
+                .build()
+            binding.recyclerView.adapter = admobNativeAdAdapter
+        }
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    private fun observeHistoryData() {
+        mDatabaseViewModel.readAllData.observe(viewLifecycleOwner, Observer { historyList ->
+            adapter.setData(historyList)
+        })
+    }
+
+    private fun exportFile() {
+        val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "*/*"
+            putExtra(Intent.EXTRA_TITLE, "QR_Generator_base.json")
+        }
+        startActivityForResult(intent, EXPORT_REQUEST_CODE)
+    }
+
+    private fun importFile() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "*/*"
+        }
+        startActivityForResult(intent, IMPORT_REQUEST_CODE)
     }
 
     fun deleteAllHistory() {
@@ -206,7 +162,7 @@ class HistoryFragment : Fragment() {
         builder.setPositiveButton("$yes"){ _, _ ->
             mDatabaseViewModel.deleteAllHistory()
             // Toast.makeText(requireContext(), "$allHistoryDeleteText", Toast.LENGTH_LONG).show()
-            showSnackBar(binding,allHistoryDeleteText.toString())
+            showSnackbar(allHistoryDeleteText as String)
         }
 
         builder.setNegativeButton("$no"){_, _ -> }
@@ -215,42 +171,139 @@ class HistoryFragment : Fragment() {
         builder.create().show()
     }
 
-    fun startHistoryView(){
-        val recyclerView = binding.recyclerView
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-    }
 
-    fun writeFileJson(filePath: String, fileName: String, text: String) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                EXPORT_REQUEST_CODE -> {
+                    data?.data?.let { uri ->
+                        val outputStream = requireContext().contentResolver.openOutputStream(uri)
+                        if (outputStream != null) {
+                            val jsonFile = createJsonFile()
+                            if (jsonFile != null) {
+                                writeFileJson(outputStream as FileOutputStream, jsonFile)
+                            }
+                        }
+                    }
+                }
+                IMPORT_REQUEST_CODE -> {
+                    data?.data?.let { uri ->
+                        val inputStream = requireContext().contentResolver.openInputStream(uri)
+                        if (inputStream != null) {
+                            val fileContent = readFileFromInputStream(inputStream)
+                            val importTextFromJson = readFileJson(fileContent)
+                            Log.d("MyLog","$importTextFromJson")
+                            if (importTextFromJson != null) {
+                                when (importTextFromJson) {
+                                    "FileNotFoundException" -> {
+                                        val message = resources.getText(R.string.message_no_file)
+                                        showSnackbar(message.toString())
+                                    }
+                                    else -> {
+                                        val interInBase = Gson().fromJson(
+                                            importTextFromJson,
+                                            JsonToBase::class.java
+                                        )
+                                        if (interInBase != null) {
+                                            val interInBaseCount = interInBase.size
+                                            Log.d(
+                                                "MyLog",
+                                                "счетчик файла импорта - $interInBaseCount"
+                                            )
+                                            val oldHistoryList = adapter.giveOldHistoryList()
+                                            mDatabaseViewModel.deleteAllHistory()
+                                            mDatabaseViewModel.addQrJsonToBase(interInBase)
 
-        try {
-            val myFile = File(Environment.getExternalStorageDirectory().toString() + "/" + filePath + fileName)
-            myFile.createNewFile()
-            val outputStream = FileOutputStream(myFile)
-            outputStream.write(text.toByteArray())
+                                            fun <T> concatenate(vararg lists: List<T>): List<T> {
+                                                val result: MutableList<T> = ArrayList()
+                                                for (list in lists) {
+                                                    result += list
+                                                }
+                                                return result
+                                            }
 
-            val message = resources.getText(R.string.message_save_json)
-            //Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
-            showSnackBar(binding,message.toString())
-        } catch (e: Exception) {
-            e.printStackTrace()
-            val message = resources.getText(R.string.message_dont_save_json)
-            //Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
-            showSnackBar(binding,message.toString())
+                                            val list = concatenate(oldHistoryList, interInBase)
+                                            mDatabaseViewModel.addListHistory(list)
+                                            val message =
+                                                resources.getText(R.string.message_import_sucsess)
+                                            showSnackbar(message.toString())
+                                        }
+                                    }
+                                }
+                        }
+                        }else {
+                            val message = resources.getText(R.string.message_json_is_null)
+                            showSnackbar(message.toString())
+                        }
+                    }
+                }
+            }
         }
     }
 
-    @OptIn(InternalCoroutinesApi::class)
-    fun HistoryFragment.showSnackBar(binding: FragmentHistoryBinding, message: String) {
-        val snackBar = Snackbar.make(
-            binding.root,
-            message,
-            Snackbar.LENGTH_SHORT
-        )
-        snackBar.setAction("Ok") {}
-        snackBar.setActionTextColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
-        snackBar.setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.blue))
-        snackBar.show()
+    private fun createJsonFile(): String? {
+        val jsonFile = adapter.toJson()
+        val logSize = jsonFile?.length
+        if (logSize != null) {
+            if (jsonFile.isNullOrEmpty()||logSize<=2){
+                val message = resources.getText(R.string.message_json_is_null)
+                showSnackbar(message.toString())
+                //Toast.makeText(binding.root.context, message, Toast.LENGTH_LONG).show()
+                Log.d("MyLog", "длинна json файла - $logSize")
+            }
+        }
+        return jsonFile
     }
 
+    private fun writeFileJson(outputStream: FileOutputStream, jsonFile: String) {
+        try {
+            outputStream.write(jsonFile.toByteArray())
+            outputStream.flush()
+            showSnackbar(getString(R.string.message_save_json))
+        } catch (e: Exception) {
+            showSnackbar(getString(R.string.message_dont_save_json))
+        } finally {
+            outputStream.close()
+        }
+    }
+
+    private fun readFileFromInputStream(inputStream: InputStream): String {
+        return inputStream.bufferedReader().use { it.readText() }
+    }
+
+    private fun readFileJson(fileContent: String): String? {
+        val interInBase = Gson().fromJson(fileContent, JsonToBase::class.java)
+        if (interInBase == null) {
+            val message = resources.getText(R.string.message_no_file)
+            showSnackbar(message.toString())
+            return null
+        }
+
+        val interInBaseCount = interInBase.size
+        Log.d("MyLog", "счетчик файла импорта - $interInBaseCount")
+        val oldHistoryList = adapter.giveOldHistoryList()
+        mDatabaseViewModel.deleteAllHistory()
+        mDatabaseViewModel.addQrJsonToBase(interInBase)
+
+        fun <T> concatenate(vararg lists: List<T>): List<T> {
+            val result: MutableList<T> = ArrayList()
+            for (list in lists) {
+                result += list
+            }
+            return result
+        }
+
+        val list = concatenate(oldHistoryList, interInBase)
+        mDatabaseViewModel.addListHistory(list)
+        val message = resources.getText(R.string.message_import_sucsess)
+        showSnackbar(message.toString())
+
+        return fileContent
+    }
+
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+    }
 }

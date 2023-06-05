@@ -1,5 +1,7 @@
 package download.mishkindeveloper.qrgenerator.fragments.history
 
+import android.app.Activity
+import android.content.Context
 import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,8 +15,12 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
+import download.mishkindeveloper.qrgenerator.MainActivity
 import download.mishkindeveloper.qrgenerator.R
 import download.mishkindeveloper.qrgenerator.databinding.CustomRowBinding
 import download.mishkindeveloper.qrgenerator.databinding.FragmentHistoryBinding
@@ -22,6 +28,7 @@ import download.mishkindeveloper.qrgenerator.databinding.FragmentHomeBinding
 import download.mishkindeveloper.qrgenerator.model.History
 import kotlinx.coroutines.InternalCoroutinesApi
 import java.io.*
+import kotlin.coroutines.coroutineContext
 
 
 
@@ -36,7 +43,6 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>(), Filtera
     private val filePath = "MyFileStorage"
 
     lateinit var binding: FragmentHistoryBinding
-
 
     private var mFile: File? = null
     private val mData = ""
@@ -64,6 +70,8 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>(), Filtera
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        //activity = parent.context as Activity
+        //initAds()
         return ViewHolder(
             CustomRowBinding
                 .inflate
@@ -71,20 +79,19 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>(), Filtera
                     LayoutInflater.from(parent.context), parent, false
                 )
         )
-
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = historyList[position]
         holder.bind(currentItem)
 
+
         holder.rowLayout.setOnClickListener {
             val action = HistoryFragmentDirections.actionHistoryFragmentToQrFragment(currentItem)
             holder.itemView.findNavController().navigate(action)
         }
-
-
     }
+
 
     override fun getItemCount(): Int {
         return historyList.size
@@ -185,7 +192,6 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>(), Filtera
 
 return filter
     }
-
 
 //    fun clickDelete() {
 //        //редактирование но не тут

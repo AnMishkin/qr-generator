@@ -45,10 +45,10 @@
 
 
 <!--    экспорт/импорт-->
-    <string name="message_save_json">Your database of QR codes - saved in the download folder!</string>
+    <string name="message_save_json">Your database of QR codes - saved!</string>
     <string name="message_dont_save_json">An error has occurred! Your database of QR codes is not saved!</string>
     <string name="message_json_is_null">You have nothing to export yet, create a qr code!</string>
-    <string name="message_no_file">" The import file was not found, check its presence in the download folder!"</string>
+    <string name="message_no_file">Import file not found or empty!</string>
     <string name="message_import_sucsess">"Your import file with QR codes has been successfully added to the application!"</string>
 
 
@@ -61,7 +61,23 @@
     <string name="ad_attribution" translatable="false">Ad</string>
     <string name="ad_call_to_action_text" translatable="false">Install</string>
     <string name="ad_app_icon_content_description" translatable="false">icon</string>
+    <string name="ad_app_open" translatable="false">Open</string>
 
+
+<!--    отзыв-->
+    <string name="update_available">Update available</string>
+<string name="update_text">Your app has an update available. Do you want to go to the Google Play page to update?</string>
+<string name="update_yes">Yes</string>
+<string name="update_no">No</string>
+
+<string name="update_canceled">Update canceled!</string>
+<string name="new_app_is_ready">New update is ready!</string>
+<string name="update_install">Install</string>
+
+<string name="text_review">Для нас дуже важливий кожен відгук! Витратьте 1 хвилину вашого часу – допоможіть у розвитку програми! Величезне спасибі! Слава Україні!</string>
+<string name="laiter_review">Пізніше</string>
+<string name="leave_review">Залишіть будь ласка відгук!</string>
+<string name="ok_review">Із задоволенням!</string>
 
 
 

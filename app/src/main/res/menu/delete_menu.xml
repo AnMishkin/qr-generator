@@ -8,7 +8,7 @@
         android:title=""
         android:iconTint="@color/white"
         android:titleTextColor="@android:color/white"
-        app:actionViewClass="android.widget.SearchView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always"
         app:theme="@style/toolbar" />
     <item

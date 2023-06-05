@@ -1,5 +1,6 @@
 package download.mishkindeveloper.qrgenerator
 
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -22,23 +23,64 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 
+//импорт по проверке отзыва
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.InstallStateUpdatedListener
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.InstallStatus
+import com.google.android.play.core.install.model.UpdateAvailability
+import android.content.Intent
+import android.content.IntentSender.SendIntentException
+import android.widget.Toast
+import androidx.annotation.Nullable
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
-
+    private var mInterstitialAd: InterstitialAd? = null
+    private final var TAG = "MainActivity"
+    private lateinit var activity: Activity
     private var countAd:Int = 0
     private lateinit var analytics: FirebaseAnalytics
 
-    private var mInterstitialAd: InterstitialAd? = null
-    private final var TAG = "MainActivity"
+    //по проверке отзыва
+    lateinit var mAppUpdateManager: AppUpdateManager
+    private val RC_APP_UPDATE = 100
+    private var updateCanceled: String? = null
+    private var newAppIsReady: String? = null
+    private var updateInstall: String? = null
 
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_QRCreator)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        activity = this@MainActivity
+        updateCanceled = getString(R.string.update_canceled)
+        newAppIsReady = getString(R.string.new_app_is_ready)
+        updateInstall = getString(R.string.update_install)
+
+        mAppUpdateManager = AppUpdateManagerFactory.create(this)
+        mAppUpdateManager.registerListener(installStateUpdatedListener)
+
+        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
+            ) {
+                try {
+                    mAppUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo, AppUpdateType.FLEXIBLE, this, RC_APP_UPDATE
+                    )
+                } catch (e: SendIntentException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+        MobileAds.initialize(this) {}
         initAds()
         analytics = Firebase.analytics
         setupNav()
@@ -50,6 +92,39 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    override fun onStop() {
+        mAppUpdateManager.unregisterListener(installStateUpdatedListener)
+        super.onStop()
+    }
+    override fun onResume() {
+        super.onResume()
+
+        // Проверка состояния обновления
+        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
+                // Обновление было загружено, отображаем сообщение
+                showCompletedUpdate()
+            } else if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                // Процесс обновления был приостановлен, возобновляем его
+                try {
+                    mAppUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo,
+                        AppUpdateType.FLEXIBLE,
+                        this,
+                        RC_APP_UPDATE
+                    )
+                } catch (e: SendIntentException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
+
+
+
+
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
@@ -67,35 +142,31 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment -> {
                     //showAd()
                     showBottomNav()
-                    initAds()
+                    //initAds()
                 }
                 R.id.historyFragment -> {
                     Log.d("MyLog", "count до нажатия на историю - $countAd")
-                    countAd++
-                    Log.d("MyLog", "count gjckt нажатия на историю - $countAd")
-                    if (countAd==4) {
+                    if (countAd == 3) {
                         showAd()
-                        countAd=0
+                        countAd = 0
+                        initAds()
+                    } else {
+                        countAd++
                     }
+                    Log.d("MyLog", "count после нажатия на историю - $countAd")
+
 
                  //showAd()
                     Log.d("MyLog","нажали на историю")
                     showBottomNav()
-                    initAds()
+                    //initAds()
                 }
                 else -> hideBottomNav()
             }
         }
     }
 
-    private fun showAd(){
-        if (mInterstitialAd != null) {
-            mInterstitialAd?.show(this)
-        } else {
-            initAds()
-            Log.d("TAG", "The interstitial ad wasn't ready yet.")
-        }
-    }
+
 
     private fun showBottomNav() {
         binding.bottomNavView.visibility = View.VISIBLE
@@ -124,19 +195,19 @@ class MainActivity : AppCompatActivity() {
         return super.dispatchTouchEvent(ev)
     }
 
-    private fun initAds() {
-        MobileAds.initialize(this) {}
-        var adRequest = AdRequest.Builder().build()
+    fun initAds() {
+
+        val adRequest = AdRequest.Builder().build()
 
         InterstitialAd.load(
-            this,
-            "ca-app-pub-3971991853344828/1364337964",
+            activity,
+            "ca-app-pub-3971991853344828/1558485797",
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     Log.d(TAG, adError.toString())
                     mInterstitialAd = null
-                    initAds()
+                    Log.d(TAG, "Failed to load interstitial ad.")
                 }
 
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
@@ -144,39 +215,78 @@ class MainActivity : AppCompatActivity() {
                     mInterstitialAd = interstitialAd
                 }
             })
+
         mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdClicked() {
-                // Called when a click is recorded for an ad.
                 Log.d(TAG, "Ad was clicked.")
+                initAds()
             }
 
             override fun onAdDismissedFullScreenContent() {
-                // Called when ad is dismissed.
                 Log.d(TAG, "Ad dismissed fullscreen content.")
                 mInterstitialAd = null
                 initAds()
             }
 
-            override fun onAdFailedToShowFullScreenContent(p0: AdError) {
-                // Called when ad fails to show.
-                Log.e(TAG, "Ad failed to show fullscreen content.")
+            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                Log.e(TAG, "Ad failed to show fullscreen content: ${adError.message}")
                 mInterstitialAd = null
                 initAds()
             }
 
             override fun onAdImpression() {
-                // Called when an impression is recorded for an ad.
                 Log.d(TAG, "Ad recorded an impression.")
+                initAds()
             }
 
             override fun onAdShowedFullScreenContent() {
-                // Called when ad is shown.
                 Log.d(TAG, "Ad showed fullscreen content.")
                 initAds()
             }
         }
     }
+    private fun showAd(){
+        if (mInterstitialAd != null) {
+            mInterstitialAd?.show(activity)
+        } else {
+            initAds()
+            Log.d("TAG", "The interstitial ad wasn't ready yet.")
+        }
+    }
 
+    //проверка обновления программы
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        @Nullable data: Intent?
+    ) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_APP_UPDATE && resultCode != RESULT_OK) {
+            // Handle the update cancellation
+            Toast.makeText(this, updateCanceled, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private val installStateUpdatedListener =
+        InstallStateUpdatedListener { state ->
+            if (state.installStatus() == InstallStatus.DOWNLOADED) {
+                // Show the update completion message
+                showCompletedUpdate()
+            }
+        }
+    private fun showCompletedUpdate() {
+        val snackbar = newAppIsReady?.let {
+            Snackbar.make(
+                findViewById(android.R.id.content), it,
+                Snackbar.LENGTH_INDEFINITE
+            )
+        }
+        snackbar?.setAction(
+            updateInstall
+        ) { mAppUpdateManager.completeUpdate() }
+        snackbar?.show()
+    }
+    //конец проверки обновления программы
 }
 
 
