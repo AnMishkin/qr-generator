@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar
@@ -27,6 +28,7 @@ import download.mishkindeveloper.qrgenerator.databinding.FragmentHistoryBinding
 import download.mishkindeveloper.qrgenerator.fragments.globalFunctions.updateOrRequestPermissions
 import download.mishkindeveloper.qrgenerator.json.JsonToBase
 import download.mishkindeveloper.qrgenerator.model.History
+import download.mishkindeveloper.qrgenerator.moveItemRecycler.ItemTouchHelperCallback
 import download.mishkindeveloper.qrgenerator.viewmodels.DatabaseViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
 import java.io.File
@@ -65,6 +67,10 @@ class HistoryFragment : Fragment() {
         //search
 //        searchView = binding.root.findViewById(R.id.search)
 //        searchView?.clearFocus()
+        //перемещение итемов
+        val callback = ItemTouchHelperCallback(adapter)
+        val itemTouchHelper = ItemTouchHelper(callback)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
 
         setupRecyclerView()
         observeHistoryData()

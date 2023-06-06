@@ -26,13 +26,16 @@ import download.mishkindeveloper.qrgenerator.databinding.CustomRowBinding
 import download.mishkindeveloper.qrgenerator.databinding.FragmentHistoryBinding
 import download.mishkindeveloper.qrgenerator.databinding.FragmentHomeBinding
 import download.mishkindeveloper.qrgenerator.model.History
+import download.mishkindeveloper.qrgenerator.moveItemRecycler.ItemTouchHelperAdapter
 import kotlinx.coroutines.InternalCoroutinesApi
 import java.io.*
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.coroutines.coroutineContext
 
 
 
-class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>(), Filterable  {
+class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>(), Filterable,ItemTouchHelperAdapter  {
 
     val mapper = jacksonObjectMapper()
     private var historyList = emptyList<History>()
@@ -192,6 +195,25 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>(), Filtera
 
 return filter
     }
+
+//    override fun onItemDismiss(position: Int) {
+//        historyList = historyList.filterIndexed { index, _ -> index != position }
+//        notifyItemRemoved(position)
+//    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        if (fromPosition < toPosition) {
+            for (i in fromPosition until toPosition) {
+                Collections.swap(historyList, i, i + 1)
+            }
+        } else {
+            for (i in fromPosition downTo toPosition + 1) {
+                Collections.swap(historyList, i, i - 1)
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition)
+    }
+
 
 //    fun clickDelete() {
 //        //редактирование но не тут
