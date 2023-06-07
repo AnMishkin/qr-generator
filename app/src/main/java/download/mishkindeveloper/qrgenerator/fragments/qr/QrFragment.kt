@@ -1,7 +1,9 @@
 package download.mishkindeveloper.qrgenerator.fragments.qr
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -33,12 +35,13 @@ import java.util.*
 class QrFragment : Fragment() {
 
     private lateinit var mAdView : AdView
-
-    private val adapterHistory = HistoryAdapter()
+    private lateinit var historyFragment : HistoryFragment
+    private lateinit var adapterHistory: HistoryAdapter
     private var isImageScaled = false
     private lateinit var binding: FragmentQrBinding
     private val mDatabaseViewModel: DatabaseViewModel by viewModels()
     private val args by navArgs<QrFragmentArgs>()
+    var admobNativeAdAdapterListener: AdmobNativeAdAdapterListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +49,8 @@ class QrFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding =  FragmentQrBinding.inflate(inflater, container, false)
-
+historyFragment = HistoryFragment()
+        adapterHistory = HistoryAdapter(HistoryFragment())
         //банерная реклама
         MobileAds.initialize(this.requireContext()) {}
         mAdView = binding.adViewQrFragment
@@ -120,33 +124,50 @@ class QrFragment : Fragment() {
         menuItem.isVisible = false
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.delete_menu) {
-            deleteQrHistory()
+            mDatabaseViewModel.deleteQrHistory(args.currentQR)
+//adapterHistory.notifyItemRemoved(args.currentQR.id)
+
+           findNavController().navigateUp()
+            admobNativeAdAdapterListener?.notifyDataSetChanged()
+
+//            Log.d("MyLog","после удаления - ${adapterHistory.giveOldHistoryList()}")
+//            mDatabaseViewModel.deleteQrHistory(args.currentQR)
+//            Log.d("MyLog","после удаления - ${adapterHistory.itemCount}")
+//
+//            adapterHistory.notifyDataSetChanged()
+//            findNavController().navigateUp()
+
         }
         return super.onOptionsItemSelected(item)
     }
 
-    fun deleteQrHistory() {
-        val yes  = resources.getText(R.string.yes)
-        val no  = resources.getText(R.string.no)
-        val removed  = resources.getText(R.string.removed)
-        val delete  = resources.getText(R.string.delete)
-        val sure  = resources.getText(R.string.sure_delete_qr)
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setPositiveButton("$yes"){ _, _ ->
-            mDatabaseViewModel.deleteQrHistory(args.currentQR)
-//adapterHistory.notifyDataSetChanged()
-            showSnackBar(binding,"$removed ${args.currentQR.type}")
-            //Toast.makeText(requireContext(), "$removed ${args.currentQR.type}", Toast.LENGTH_SHORT).show()
-        findNavController().navigateUp()
-
-        }
-        builder.setNegativeButton("$no"){_, _ -> }
-        builder.setTitle("$delete ${args.currentQR.type} ?")
-        builder.setMessage("$sure")
-        builder.create().show()
-    }
+//    @SuppressLint("NotifyDataSetChanged")
+//    fun deleteQrHistory() {
+//        val yes  = resources.getText(R.string.yes)
+//        val no  = resources.getText(R.string.no)
+//        val removed  = resources.getText(R.string.removed)
+//        val delete  = resources.getText(R.string.delete)
+//        val sure  = resources.getText(R.string.sure_delete_qr)
+//        val builder = AlertDialog.Builder(requireContext())
+//        builder.setPositiveButton("$yes"){ _, _ ->
+//            mDatabaseViewModel.deleteQrHistory(args.currentQR)
+//        var id = args.currentQR.id
+//
+//        this.adapterHistory.notifyItemRemoved(id)
+//            showSnackBar(binding,"$removed ${args.currentQR.type}")
+//            //Toast.makeText(requireContext(), "$removed ${args.currentQR.type}", Toast.LENGTH_SHORT).show()
+//
+//        findNavController().navigateUp()
+//
+//        }
+//        builder.setNegativeButton("$no"){_, _ -> }
+//        builder.setTitle("$delete ${args.currentQR.type} ?")
+//        builder.setMessage("$sure")
+//        builder.create().show()
+//    }
 
     @OptIn(InternalCoroutinesApi::class)
     fun QrFragment.showSnackBar(binding: FragmentQrBinding, message: String) {

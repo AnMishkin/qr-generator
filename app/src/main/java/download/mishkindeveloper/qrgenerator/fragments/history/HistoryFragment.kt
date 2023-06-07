@@ -1,12 +1,17 @@
 package download.mishkindeveloper.qrgenerator.fragments.history
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ClipData.Item
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.view.*
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -17,6 +22,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.MobileAds
@@ -25,7 +31,10 @@ import com.google.gson.Gson
 import download.mishkindeveloper.qrgenerator.R
 import download.mishkindeveloper.qrgenerator.admob_advanced_native_recyvlerview.AdmobNativeAdAdapter
 import download.mishkindeveloper.qrgenerator.databinding.FragmentHistoryBinding
+import download.mishkindeveloper.qrgenerator.databinding.FragmentQrBinding
 import download.mishkindeveloper.qrgenerator.fragments.globalFunctions.updateOrRequestPermissions
+import download.mishkindeveloper.qrgenerator.fragments.qr.AdmobNativeAdAdapterListener
+import download.mishkindeveloper.qrgenerator.fragments.qr.QrFragment
 import download.mishkindeveloper.qrgenerator.json.JsonToBase
 import download.mishkindeveloper.qrgenerator.model.History
 import download.mishkindeveloper.qrgenerator.moveItemRecycler.ItemTouchHelperCallback
@@ -37,16 +46,18 @@ import java.io.InputStream
 import java.util.ArrayList
 
 @InternalCoroutinesApi
-class HistoryFragment : Fragment() {
+class HistoryFragment : Fragment(),AdmobNativeAdAdapterListener {
 
     private lateinit var binding: FragmentHistoryBinding
     private val mDatabaseViewModel: DatabaseViewModel by viewModels()
-    private val adapter = HistoryAdapter()
+    private lateinit var adapter : HistoryAdapter
     private var historyList = emptyList<History>()
     private var searchView: SearchView? = null
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
     private var readPermissionGranted = false
     private var writePermissionGranted = false
+    private lateinit var admobNativeAdAdapter: AdmobNativeAdAdapter
+
 
     companion object {
         private const val EXPORT_REQUEST_CODE = 1
@@ -56,6 +67,7 @@ class HistoryFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHistoryBinding.inflate(inflater, container, false)
 
+        adapter = HistoryAdapter(this)
         setHasOptionsMenu(true)
 
         permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -123,8 +135,8 @@ class HistoryFragment : Fragment() {
         if (currentAdapter != null) {
             val nativeAdId = "ca-app-pub-3971991853344828/9607333997"
             val nativeAdsType = "small" // Замените на "small", "medium" или "custom"
-            val interval = 5 // Замените на желаемый интервал повторения рекламы
-            val admobNativeAdAdapter = AdmobNativeAdAdapter.Builder
+            val interval = 4 // Замените на желаемый интервал повторения рекламы
+            admobNativeAdAdapter = AdmobNativeAdAdapter.Builder
                 .with(nativeAdId, currentAdapter, nativeAdsType)
                 .adItemIterval(interval)
                 .build()
@@ -312,4 +324,70 @@ class HistoryFragment : Fragment() {
     private fun showSnackbar(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
+
+    //изменение QR кода в истории
+    fun editOneHistory(currentItem: History, context: Context) {
+        val builder = android.app.AlertDialog.Builder(context).create()
+        val view = LayoutInflater.from(context).inflate(R.layout.edit_qr_in_history, null)
+        val textTitle = view.findViewById<TextView>(R.id.textTitle)
+        val updateButtonInEditHistory = view.findViewById<Button>(R.id.setNewQrBtn)
+        val nameEditText = view.findViewById<EditText>(R.id.editQrName)
+        val editQrText = view.findViewById<EditText>(R.id.editTextQr)
+
+        textTitle.setText(R.string.text_title_in_edit_qr)
+        nameEditText.setText(currentItem.type)
+        editQrText.setText(currentItem.qrText)
+
+        updateButtonInEditHistory.setOnClickListener {
+            val type = nameEditText.text.toString()
+            val text = editQrText.text.toString()
+            val addNameQr = editQrText.text.toString()
+            val qrText = editQrText.text.toString()
+
+            currentItem.type = type
+            currentItem.text = text
+            currentItem.addNameQr = addNameQr
+            currentItem.qrText = qrText
+
+            mDatabaseViewModel.updateQr(currentItem)
+            Log.d("MyLog", "обновленный итем - $currentItem")
+            builder.dismiss()
+
+            // остальной код
+        }
+
+        builder.setView(view)
+        builder.show()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    override fun notifyDataSetChanged() {
+        admobNativeAdAdapter.notifyDataSetChanged()
+    }
+
+//    @SuppressLint("NotifyDataSetChanged")
+//    fun deleteQrHistory(history: History) {
+//        val yes  = resources.getText(R.string.yes)
+//        val no  = resources.getText(R.string.no)
+//        val removed  = resources.getText(R.string.removed)
+//        val delete  = resources.getText(R.string.delete)
+//        val sure  = resources.getText(R.string.sure_delete_qr)
+//        val builder = AlertDialog.Builder(requireContext())
+//        builder.setPositiveButton("$yes"){ _, _ ->
+//            mDatabaseViewModel.deleteQrHistory(history)
+//        //var id = args.currentQR.id
+//
+//        this.adapter.notifyItemRemoved(id)
+//           // showSnackBar(binding,"$removed ${args.currentQR.type}")
+//            //Toast.makeText(requireContext(), "$removed ${args.currentQR.type}", Toast.LENGTH_SHORT).show()
+//
+//        findNavController().navigateUp()
+//
+//        }
+//        builder.setNegativeButton("$no"){_, _ -> }
+//        builder.setTitle("$delete ${history.type} ?")
+//        builder.setMessage("$sure")
+//        builder.create().show()
+//    }
 }
+

@@ -1,16 +1,15 @@
 package download.mishkindeveloper.qrgenerator.fragments.history
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
-import android.widget.ImageButton
-import android.widget.ImageView
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +24,8 @@ import download.mishkindeveloper.qrgenerator.R
 import download.mishkindeveloper.qrgenerator.databinding.CustomRowBinding
 import download.mishkindeveloper.qrgenerator.databinding.FragmentHistoryBinding
 import download.mishkindeveloper.qrgenerator.databinding.FragmentHomeBinding
+import download.mishkindeveloper.qrgenerator.fragments.qr.AdmobNativeAdAdapterListener
+import download.mishkindeveloper.qrgenerator.fragments.qr.QrFragment
 import download.mishkindeveloper.qrgenerator.model.History
 import download.mishkindeveloper.qrgenerator.moveItemRecycler.ItemTouchHelperAdapter
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -35,7 +36,8 @@ import kotlin.coroutines.coroutineContext
 
 
 
-class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>(), Filterable,ItemTouchHelperAdapter  {
+class HistoryAdapter @OptIn(InternalCoroutinesApi::class) constructor(private val historyFragment: HistoryFragment): RecyclerView.Adapter<HistoryAdapter.ViewHolder>(), Filterable,ItemTouchHelperAdapter,
+    AdmobNativeAdAdapterListener {
 
     val mapper = jacksonObjectMapper()
     private var historyList = emptyList<History>()
@@ -59,7 +61,7 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>(), Filtera
 
 
         var rowLayout: ConstraintLayout = binding.rowLayout
-
+        var imEditInHistory : ImageButton = binding.imEditButton
 
         fun bind(history: History) {
             text.text = history.text
@@ -84,14 +86,24 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ViewHolder>(), Filtera
         )
     }
 
+    @OptIn(InternalCoroutinesApi::class)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = historyList[position]
         holder.bind(currentItem)
 
+        //редактирование QR кода в истории
+        holder.imEditInHistory.setOnClickListener {
+            historyFragment.editOneHistory(currentItem, holder.itemView.context)
+            Log.d("MyLog","Hello")
+
+        }
 
         holder.rowLayout.setOnClickListener {
             val action = HistoryFragmentDirections.actionHistoryFragmentToQrFragment(currentItem)
             holder.itemView.findNavController().navigate(action)
+            val qrFragment = QrFragment()
+            qrFragment.admobNativeAdAdapterListener = this
+
         }
     }
 
@@ -212,6 +224,11 @@ return filter
             }
         }
         notifyItemMoved(fromPosition, toPosition)
+    }
+
+    fun updateList(newList: List<History>) {
+        historyList = newList
+        notifyDataSetChanged()
     }
 
 

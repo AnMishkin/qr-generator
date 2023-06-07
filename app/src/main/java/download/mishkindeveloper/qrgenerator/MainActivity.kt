@@ -1,40 +1,37 @@
 package download.mishkindeveloper.qrgenerator
 
+//импорт по проверке отзыва
 import android.app.Activity
 import android.content.Context
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.content.IntentSender.SendIntentException
 import android.os.Bundle
-import android.provider.Settings.System.putInt
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.annotation.Nullable
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-
 import com.google.android.gms.ads.*
-import download.mishkindeveloper.qrgenerator.databinding.ActivityMainBinding
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.ktx.Firebase
-
-//импорт по проверке отзыва
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
-import android.content.Intent
-import android.content.IntentSender.SendIntentException
-import android.widget.Toast
-import androidx.annotation.Nullable
-import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
+import download.mishkindeveloper.qrgenerator.databinding.ActivityMainBinding
+import download.mishkindeveloper.qrgenerator.reviewManager.ReviewManager
 
 class MainActivity : AppCompatActivity() {
     private var mInterstitialAd: InterstitialAd? = null
@@ -53,7 +50,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
 
-
+    private lateinit var textReview : String
+    private lateinit var laiterReview : String
+    private lateinit var leaveReview : String
+    private lateinit var okReview : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_QRCreator)
@@ -80,6 +80,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        init()
+        ReviewManager(this).checkAndPromptForReview(textReview,laiterReview,leaveReview,okReview)
         MobileAds.initialize(this) {}
         initAds()
         analytics = Firebase.analytics
@@ -287,6 +289,13 @@ class MainActivity : AppCompatActivity() {
         snackbar?.show()
     }
     //конец проверки обновления программы
+
+    private fun init() {
+        textReview = getString(R.string.text_review)
+        laiterReview = getString(R.string.laiter_review)
+        leaveReview = getString(R.string.leave_review)
+        okReview = getString(R.string.ok_review)
+    }
 }
 
 

@@ -13,10 +13,10 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Entity(tableName = "history_table")
 data class History (
-    @ColumnInfo(name = "text") val text: String,
-    @ColumnInfo(name = "addNameQr") val addNameQr: String,
-    @ColumnInfo(name = "qr_text") val qrText: String,
-    @ColumnInfo(name = "type") val type: String,
+    @ColumnInfo(name = "text") var text: String,
+    @ColumnInfo(name = "addNameQr") var addNameQr: String,
+    @ColumnInfo(name = "qr_text") var qrText: String,
+    @ColumnInfo(name = "type") var type: String,
     //@ColumnInfo(name = "QR") val qr: Bitmap
         ): Parcelable {
 

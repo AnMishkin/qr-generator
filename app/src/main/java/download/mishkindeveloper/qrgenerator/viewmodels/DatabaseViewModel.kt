@@ -60,6 +60,11 @@ class DatabaseViewModel(application: Application): AndroidViewModel(application)
         }
     }
 
+    fun updateQr(history: History) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateQr(history)
+        }
+    }
 //    fun readAllDataForJson() {
 //        viewModelScope.launch(Dispatchers.IO) {
 //            repository.readAllDataForJson()

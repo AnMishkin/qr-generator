@@ -31,6 +31,7 @@ interface HistoryDao {
     @Query("SELECT * FROM history_table ORDER BY id DESC")
     fun readAllData(): LiveData<List<History>>
 
-
+    @Update
+    suspend fun update(history: History)
 
 }

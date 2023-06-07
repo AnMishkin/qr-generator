@@ -14,7 +14,7 @@ android {
         applicationId "download.mishkindeveloper.qrgenerator"
         minSdk 21
         targetSdk 33
-        versionCode 12
+        versionCode 14
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -58,10 +58,10 @@ dependencies {
     implementation("io.coil-kt:coil:2.0.0-rc03")
 
     // Room components
-    implementation "androidx.room:room-runtime:2.5.0"
-    kapt "androidx.room:room-compiler:2.5.0"
-    implementation "androidx.room:room-ktx:2.5.0"
-    androidTestImplementation "androidx.room:room-testing:2.5.0"
+    implementation "androidx.room:room-runtime:2.5.1"
+    kapt "androidx.room:room-compiler:2.5.1"
+    implementation "androidx.room:room-ktx:2.5.1"
+    androidTestImplementation "androidx.room:room-testing:2.5.1"
 
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"

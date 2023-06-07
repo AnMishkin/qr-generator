@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import download.mishkindeveloper.qrgenerator.data.HistoryDao
 import download.mishkindeveloper.qrgenerator.json.JsonToBase
 import download.mishkindeveloper.qrgenerator.model.History
+import kotlinx.coroutines.Dispatchers
+
 
 class HistoryRepository(private val historyDao: HistoryDao) {
 
@@ -32,7 +34,7 @@ class HistoryRepository(private val historyDao: HistoryDao) {
         historyDao.deleteAllHistory()
     }
 
-//    suspend fun readAllDataForJson() {
-//        historyDao.readAllDataForJson()
-//    }
+    suspend fun updateQr(history: History) {
+        historyDao.update(history)
+    }
 }

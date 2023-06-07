@@ -74,10 +74,12 @@
 <string name="new_app_is_ready">New update is ready!</string>
 <string name="update_install">Install</string>
 
-<string name="text_review">Для нас дуже важливий кожен відгук! Витратьте 1 хвилину вашого часу – допоможіть у розвитку програми! Величезне спасибі! Слава Україні!</string>
-<string name="laiter_review">Пізніше</string>
-<string name="leave_review">Залишіть будь ласка відгук!</string>
-<string name="ok_review">Із задоволенням!</string>
+<string name="text_review">Every review is very important to us! Spend 1 minute of your time - help in the development of the program! Thank you very much! Glory to Ukraine!</string>
+<string name="laiter_review">Later</string>
+<string name="leave_review">Please leave a review!</string>
+<string name="ok_review">With pleasure!</string>
+
+<string name="text_title_in_edit_qr">Enter a new name or a new QR code value!</string>
 
 
 

@@ -50,5 +50,6 @@
     <string name="text_review">Для нас дуже важливий кожен відгук! Витратьте 1 хвилину вашого часу – допоможіть у розвитку програми! Величезне спасибі! Слава Україні!</string>
     <string name="laiter_review">Пізніше</string>
     <string name="ok_review">Із задоволенням!</string>
+    <string name="text_title_in_edit_qr">Введите новое название или новое значение QR код!</string>
 
 </resources>
