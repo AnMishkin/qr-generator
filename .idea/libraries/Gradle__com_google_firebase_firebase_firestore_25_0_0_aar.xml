@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.firebase:firebase-firestore:25.0.0@aar" external-system-id="GRADLE">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../AnimalNewFromMyGit/.gradle/caches/transforms-4/a9a59606c45ea3150701e05e97b3e7a4/transformed/jetified-firebase-firestore-25.0.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../../AnimalNewFromMyGit/.gradle/caches/transforms-4/a9a59606c45ea3150701e05e97b3e7a4/transformed/jetified-firebase-firestore-25.0.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-firestore/25.0.0/fdfe80b49709839e10c4ff27eb5f894abad68ec4/firebase-firestore-25.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

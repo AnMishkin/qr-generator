@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.size
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -32,6 +33,7 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import download.mishkindeveloper.qrgenerator.databinding.ActivityMainBinding
 import download.mishkindeveloper.qrgenerator.reviewManager.ReviewManager
+import com.google.android.gms.ads.MobileAds
 
 class MainActivity : AppCompatActivity() {
     private var mInterstitialAd: InterstitialAd? = null
@@ -64,8 +66,10 @@ class MainActivity : AppCompatActivity() {
         newAppIsReady = getString(R.string.new_app_is_ready)
         updateInstall = getString(R.string.update_install)
 
+        MobileAds.initialize(this) {}
+
         mAppUpdateManager = AppUpdateManagerFactory.create(this)
-        mAppUpdateManager.registerListener(installStateUpdatedListener)
+        //mAppUpdateManager.registerListener(installStateUpdatedListener)
 
         mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
@@ -88,11 +92,6 @@ class MainActivity : AppCompatActivity() {
         setupNav()
         setupActionBarWithNavController(navController)
        binding.bottomNavView.setupWithNavController(navController)
-
-
-
-
-
     }
 
     override fun onStop() {
@@ -123,16 +122,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
-
-
-
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
-
-
 
     private fun setupNav() {
         val navHost = supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
@@ -168,8 +160,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
     private fun showBottomNav() {
         binding.bottomNavView.visibility = View.VISIBLE
 
@@ -185,7 +175,6 @@ class MainActivity : AppCompatActivity() {
         //Clear the Activity's bundle of the subsidiary fragments' bundles.
         outState.clear()
     }
-
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         currentFocus?.let {
@@ -296,6 +285,8 @@ class MainActivity : AppCompatActivity() {
         leaveReview = getString(R.string.leave_review)
         okReview = getString(R.string.ok_review)
     }
+
+    
 }
 
 

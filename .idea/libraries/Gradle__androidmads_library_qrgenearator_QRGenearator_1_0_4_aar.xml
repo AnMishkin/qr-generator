@@ -1,15 +1,15 @@
 <component name="libraryTable">
-  <library name="Gradle: androidmads.library.qrgenearator:QRGenearator:1.0.4@aar">
+  <library name="Gradle: androidmads.library.qrgenearator:QRGenearator:1.0.4@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/d4bc1d04ba38e910101a1b9d10b3ab7c/transformed/jetified-QRGenearator-1.0.4/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/d4bc1d04ba38e910101a1b9d10b3ab7c/transformed/jetified-QRGenearator-1.0.4/res" />
-      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/d4bc1d04ba38e910101a1b9d10b3ab7c/transformed/jetified-QRGenearator-1.0.4/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../../AnimalNewFromMyGit/.gradle/caches/transforms-4/ece75477f415738777acec89d88d994b/transformed/jetified-QRGenearator-1.0.4/res" />
+      <root url="jar://$PROJECT_DIR$/../../AnimalNewFromMyGit/.gradle/caches/transforms-4/ece75477f415738777acec89d88d994b/transformed/jetified-QRGenearator-1.0.4/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../AnimalNewFromMyGit/.gradle/caches/transforms-4/ece75477f415738777acec89d88d994b/transformed/jetified-QRGenearator-1.0.4/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/modules-2/files-2.1/androidmads.library.qrgenearator/QRGenearator/1.0.4/3001778febe9a8b5760c8a5dca6fda1d485201b/QRGenearator-1.0.4-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/androidmads.library.qrgenearator/QRGenearator/1.0.4/3001778febe9a8b5760c8a5dca6fda1d485201b/QRGenearator-1.0.4-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/modules-2/files-2.1/androidmads.library.qrgenearator/QRGenearator/1.0.4/8cbdb790e505c6d6d1a079831313c480540cbe57/QRGenearator-1.0.4-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/androidmads.library.qrgenearator/QRGenearator/1.0.4/8cbdb790e505c6d6d1a079831313c480540cbe57/QRGenearator-1.0.4-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

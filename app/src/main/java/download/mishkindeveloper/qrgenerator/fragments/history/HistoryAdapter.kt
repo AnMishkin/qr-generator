@@ -139,7 +139,7 @@ class HistoryAdapter @OptIn(InternalCoroutinesApi::class) constructor(private va
         val snackBar = Snackbar.make(
             binding.rootLayout,
             message,
-            Snackbar.LENGTH_SHORT
+            Snackbar.LENGTH_LONG
         )
         snackBar.setAction("Ok") {}
         snackBar.setActionTextColor(ContextCompat.getColor(requireContext(), R.color.teal_200))

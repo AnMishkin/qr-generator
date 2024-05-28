@@ -1,15 +1,15 @@
 <component name="libraryTable">
-  <library name="Gradle: androidx.test:core:1.5.0@aar">
+  <library name="Gradle: androidx.test:core:1.5.0@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/72d92068eb1fc1f54afd8e958a47ca9a/transformed/jetified-core-1.5.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/72d92068eb1fc1f54afd8e958a47ca9a/transformed/jetified-core-1.5.0/res" />
-      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/72d92068eb1fc1f54afd8e958a47ca9a/transformed/jetified-core-1.5.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../../AnimalNewFromMyGit/.gradle/caches/transforms-4/04d0815417c6bc63a15c9949cf70dd8d/transformed/jetified-core-1.5.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../../AnimalNewFromMyGit/.gradle/caches/transforms-4/04d0815417c6bc63a15c9949cf70dd8d/transformed/jetified-core-1.5.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../AnimalNewFromMyGit/.gradle/caches/transforms-4/04d0815417c6bc63a15c9949cf70dd8d/transformed/jetified-core-1.5.0/res" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/modules-2/files-2.1/androidx.test/core/1.5.0/50a7c88bc23efab4bed11093b47197d11ab3d5a0/core-1.5.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/androidx.test/core/1.5.0/50a7c88bc23efab4bed11093b47197d11ab3d5a0/core-1.5.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/modules-2/files-2.1/androidx.test/core/1.5.0/d4ea5ffd68fc05c1e952467fb884f0d82b44ec3b/core-1.5.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/androidx.test/core/1.5.0/d4ea5ffd68fc05c1e952467fb884f0d82b44ec3b/core-1.5.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

@@ -149,7 +149,7 @@ class SuccessFragment : Fragment() {
         val snackBar = Snackbar.make(
             binding.root,
             message,
-            Snackbar.LENGTH_SHORT
+            Snackbar.LENGTH_LONG
         )
         snackBar.setAction("Ok") {}
         snackBar.setActionTextColor(ContextCompat.getColor(requireContext(), R.color.teal_200))

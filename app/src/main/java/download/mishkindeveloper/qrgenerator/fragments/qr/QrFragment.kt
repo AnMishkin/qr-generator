@@ -121,7 +121,7 @@ historyFragment = HistoryFragment()
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.delete_menu,menu)
         var menuItem = menu?.findItem(R.id.search)
-        menuItem.isVisible = false
+        menuItem?.isVisible = false
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -174,7 +174,7 @@ historyFragment = HistoryFragment()
         val snackBar = Snackbar.make(
             binding.root,
             message,
-            Snackbar.LENGTH_SHORT
+            Snackbar.LENGTH_LONG
         )
         snackBar.setAction("Ok") {}
         snackBar.setActionTextColor(ContextCompat.getColor(requireContext(), R.color.teal_200))

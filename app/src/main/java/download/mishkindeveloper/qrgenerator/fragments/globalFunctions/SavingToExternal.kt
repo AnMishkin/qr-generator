@@ -76,7 +76,7 @@ suspend fun Fragment.saveQRtoStorage(displayName: String, bmp: Bitmap): Boolean 
             val couldShare = resources.getText(R.string.failed_to_share)
             requireContext().contentResolver.insert(imageCollection, contentValues)?.also { uri ->
                 requireContext().contentResolver.openOutputStream(uri).use { outputStream ->
-                    if (!bmp.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)) {
+                    if (!bmp.compress(Bitmap.CompressFormat.JPEG, 100, outputStream!!)) {
                         throw IOException("$could")
                     }
                 }

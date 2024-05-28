@@ -1,13 +1,13 @@
 <component name="libraryTable">
-  <library name="Gradle: androidx.work:work-runtime:2.7.0@aar">
+  <library name="Gradle: androidx.work:work-runtime:2.7.0@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/c13b115f9e97be3d4d7dc3ec52e9cba8/transformed/work-runtime-2.7.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/c13b115f9e97be3d4d7dc3ec52e9cba8/transformed/work-runtime-2.7.0/res" />
-      <root url="file://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/transforms-3/c13b115f9e97be3d4d7dc3ec52e9cba8/transformed/work-runtime-2.7.0/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../../AnimalNewFromMyGit/.gradle/caches/transforms-4/db9fca8cdf2ce1973d3c1e18db6c0883/transformed/work-runtime-2.7.0/res" />
+      <root url="jar://$PROJECT_DIR$/../../AnimalNewFromMyGit/.gradle/caches/transforms-4/db9fca8cdf2ce1973d3c1e18db6c0883/transformed/work-runtime-2.7.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../AnimalNewFromMyGit/.gradle/caches/transforms-4/db9fca8cdf2ce1973d3c1e18db6c0883/transformed/work-runtime-2.7.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../AutoClicker3/.gradle/caches/modules-2/files-2.1/androidx.work/work-runtime/2.7.0/6d6f6716b1e282dd9a97c821baecd8a96c950749/work-runtime-2.7.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/androidx.work/work-runtime/2.7.0/6d6f6716b1e282dd9a97c821baecd8a96c950749/work-runtime-2.7.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
